@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+}
+
+.hero-bg {
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  top: -5%;
+  left: -5%;
+  background-image: url("/fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.1s ease-out;
+}
+
+.hero-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0.3)
+  );
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.navbar {
+  position: absolute;
+  width: 100%;
+  padding: 30px 120px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.navbar a {
+  margin-left: 40px;
+  text-decoration: none;
+  color: white;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 14px 30px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.primary {
+  background: white;
+  color: black;
+}
+
+.outline {
+  border: 1px solid white;
+  color: white;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes revealLine {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 0.6;
+  }
+}
+
+.animate-line {
+  transform-origin: top;
+  animation: revealLine 1.2s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.font-lotus {
+  font-family: var(--font-lotus);
+}
+
+/* ======================
+   SERVICES ANIMATIONS
+====================== */
+
+@keyframes fadeUpSoft {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes statueFloat {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes lineReveal {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.animate-line-reveal {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+
+  animation: lineReveal 0.9s cubic-bezier(.22,1,.36,1) forwards;
+  animation-delay: 0.5s;
+}
+
+.animate-statue {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+
+  animation: statueFloat 1.6s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.animate-service {
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(6px);
+
+  animation: fadeUpSoft 1s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 0.3;
+    filter: blur(0);
+  }
+}
+
+.animate-title {
+  opacity: 0;
+  filter: blur(10px);
+
+  animation: titleReveal 1.8s cubic-bezier(.22,1,.36,1) forwards;
+}
+.delay-1 { animation-delay: 0.4s; }
+.delay-2 { animation-delay: 0.7s; }
+.delay-3 { animation-delay: 1s; }
