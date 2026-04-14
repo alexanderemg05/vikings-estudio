@@ -32,6 +32,18 @@ export default function SectionBackground() {
   /* ============================= */
   /* 🎬 ESTADO PARA ANIMACIÓN */
   /* ============================= */
+const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  handleResize();
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
 
   const [loaded, setLoaded] = useState(false);
 
@@ -61,35 +73,41 @@ export default function SectionBackground() {
       {/* 🔢 SERVICIOS */}
       <div
         style={{ transform: `translateY(${SERVICES_Y}px)` }}
-        className="relative z-[30] w-full flex justify-center gap-20 pb-32"
+        className={`relative z-[30] w-full pb-32 ${
+  isMobile
+    ? "flex flex-col items-center gap-8"
+    : "flex justify-center gap-20"
+}`}
       >
         {[
-          ["#01", "Estrategia de Marca", SERVICE_1_X, SERVICE_1_Y],
-          ["#02", "Identidad Visual", SERVICE_2_X, SERVICE_2_Y],
-          ["#03", "Diseño de Packaging", SERVICE_3_X, SERVICE_3_Y],
-          ["#04", "Dirección Creativa", SERVICE_4_X, SERVICE_4_Y]
-        ].map(([num, text, x, y], i) => (
-          <div
-            key={i}
-            className="text-left transition-all duration-1000"
-            style={{
-              transform: `translate(${x}px, ${y}px)`,
-              transitionDelay: `${900 + i * 200}ms`,
-              opacity: loaded ? 1 : 0,
-              translate: loaded ? "0px 0px" : "0px 40px"
-            }}
-          >
-            <div className="text-yellow-400 font-bold">{num}</div>
-            <div
-              style={{ fontSize: `${SERVICES_SIZE}px` }}
-              className="font-bold"
-            >
-              {text}
-            </div>
-          </div>
+  ["#01", "Estrategia de Marca", SERVICE_1_X, SERVICE_1_Y],
+  ["#02", "Identidad Visual", SERVICE_2_X, SERVICE_2_Y],
+  ["#03", "Diseño de Packaging", SERVICE_3_X, SERVICE_3_Y],
+  ["#04", "Dirección Creativa", SERVICE_4_X, SERVICE_4_Y]
+].map(([num, text, x, y], i) => (
+  <div
+    key={i}
+    className={`transition-all duration-1000 ${
+      isMobile ? "text-center" : "text-left"
+    }`}
+    style={{
+      transform: isMobile ? "none" : `translate(${x}px, ${y}px)`,
+      transitionDelay: `${900 + i * 200}ms`,
+      opacity: loaded ? 1 : 0,
+      translate: loaded ? "0px 0px" : "0px 40px"
+    }}
+  >
+    <div className="text-yellow-400 font-bold">{num}</div>
+
+    <div
+      style={{ fontSize: isMobile ? "13px" : `${SERVICES_SIZE}px` }}
+      className="font-bold"
+    >
+      {text}
+    </div>
+  </div>
         ))}
       </div>
-
     </section>
   );
 }

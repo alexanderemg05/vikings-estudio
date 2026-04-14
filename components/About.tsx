@@ -12,18 +12,18 @@ export default function About() {
 
   // ISO
   const ISO_SIZE = "w-[110px]";
-  const ISO_X = -250;
+  const ISO_X = typeof window !== "undefined" && window.innerWidth < 768 ? 0 : -250;
   const ISO_Y = 90;
 
   // TITULO
-  const TITLE_SIZE = "text-[67px]";
-  const TITLE_X = -240;
+  const TITLE_SIZE = "text-3xl md:text-[67px]";
+  const TITLE_X = typeof window !== "undefined" && window.innerWidth < 768 ? 0 : -240;
   const TITLE_Y = 90;
 
   // TEXTO
-  const TEXT_SIZE = "text-[16px]";
+  const TEXT_SIZE = "text-[14px] md:text-[16px]";
   const TEXT_WIDTH = "max-w-[650px]";
-  const TEXT_X = -250;
+  const TEXT_X = typeof window !== "undefined" && window.innerWidth < 768 ? 0 : -250;
   const TEXT_Y = 90;
 
   // BOTON CONTROLES
@@ -35,7 +35,7 @@ export default function About() {
   const BTN_RADIUS = "rounded-full";
 
   // BOTON POSICION
-  const BUTTON_X = -250;
+  const BUTTON_X = typeof window !== "undefined" && window.innerWidth < 768 ? 0 : -250;
   const BUTTON_Y = 90;
   const BUTTON_SCALE = 1;
 
@@ -60,7 +60,7 @@ export default function About() {
 
       {/* CONTENEDOR */}
       <motion.div
-        className="flex flex-col items-start"
+        className="flex flex-col items-start md:items-start items-center px-6 md:px-0 text-center md:text-left"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -107,7 +107,7 @@ export default function About() {
               Vikings Estudio nace de una idea sencilla:
             </span>{" "}
             crear con la misma fuerza, determinación y
-            <br />
+            
             pasión con la que los vikingos exploraban nuevos horizontes.
           </p>
 
@@ -117,17 +117,17 @@ export default function About() {
               identidades visuales con propósito:
             </span>{" "}
             minimalistas,
-            <br />
+            
             memorables y diseñadas para ayudar a las marcas a diferenciarse y alcanzar su mejor
-            <br />
+            
             versión.
           </p>
 
           <p>
             Cada proyecto nace de un proceso creativo enfocado en comprender la esencia de la
-            <br />
+            
             marca, combinando estrategia, creatividad y diseño premium para construir identidades
-            <br />
+            
             sólidas y duraderas.
           </p>
 
@@ -197,7 +197,7 @@ export default function About() {
           >
             <motion.img
               src="/tarjeta-1.png"
-              className="max-w-[800px] rounded-xl"
+              className="max-w-[90%] md:max-w-[800px]"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}

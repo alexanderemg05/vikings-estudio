@@ -46,7 +46,7 @@ export default function ServiceModal({ service, closeModal }: ServiceModalProps)
       {service && (
 
         <motion.div
-          className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-[9999]"
+          className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-[9999] p-4 overflow-y-auto"
           style={{ isolation: "isolate" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -58,7 +58,7 @@ export default function ServiceModal({ service, closeModal }: ServiceModalProps)
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="bg-neutral-900 p-10 rounded-2xl w-[420px] text-white relative"
+            className="bg-neutral-900 p-6 md:p-10 rounded-2xl w-[90%] max-w-[420px] text-white relative"
           >
 
             <button
@@ -87,7 +87,7 @@ export default function ServiceModal({ service, closeModal }: ServiceModalProps)
                   name="name"
                   placeholder="Nombre"
                   onChange={handleChange}
-                  className="p-3 rounded bg-neutral-800"
+                  className="p-3 rounded bg-neutral-800 text-sm md:text-base"
                   required
                 />
 
@@ -96,7 +96,7 @@ export default function ServiceModal({ service, closeModal }: ServiceModalProps)
                   type="email"
                   placeholder="Email"
                   onChange={handleChange}
-                  className="p-3 rounded bg-neutral-800"
+                  className="p-3 rounded bg-neutral-800 text-sm md:text-base"
                   required
                 />
 
@@ -108,7 +108,7 @@ export default function ServiceModal({ service, closeModal }: ServiceModalProps)
                   required
                 />
 
-                <button className="bg-blue-600 py-3 rounded-full font-bold hover:scale-105 transition">
+                <button className="bg-blue-600 py-3 rounded-full font-bold hover:scale-105 transition w-full">
                   SOLICITAR
                 </button>
 

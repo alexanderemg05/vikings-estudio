@@ -9,6 +9,19 @@ export default function Services({
   activeVideo?: string | null
 }) {
 
+const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  handleResize();
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
   const [activeService, setActiveService] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -139,11 +152,17 @@ style={{ transformOrigin: "left" }}
 
       {/* SERVICIOS */}
 
-      <div className={`flex justify-center ${CARD_GAP} ${SERVICES_MARGIN_TOP} text-center relative z-10`}>
+      <div
+  className={`relative z-10 text-center ${
+    isMobile
+      ? "flex flex-col items-center gap-16 mt-20"
+      : `flex justify-center ${CARD_GAP} ${SERVICES_MARGIN_TOP}`
+  }`}
+>
 
         {/* SOCIAL */}
 
-        <div className={`max-w-[260px] ${SOCIAL_POSITION}`}>
+        <div className={`max-w-[260px] ${isMobile ? "" : SOCIAL_POSITION}`}>
 
           <div className={`transition-all duration-700 delay-400 ${
   visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -187,7 +206,7 @@ style={{ transformOrigin: "left" }}
 
         {/* BRANDING */}
 
-        <div className={`max-w-[260px] ${BRANDING_POSITION}`}>
+        <div className={`max-w-[260px] ${isMobile ? "" : BRANDING_POSITION}`}>
 
           <div className={`transition-all duration-700 delay-500 ${
   visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -231,7 +250,7 @@ style={{ transformOrigin: "left" }}
 
         {/* MOTION */}
 
-        <div className={`max-w-[260px] ${MOTION_POSITION}`}>
+        <div className={`max-w-[260px] ${isMobile ? "" : MOTION_POSITION}`}>
 
           <div className={`transition-all duration-700 delay-600 ${
   visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"

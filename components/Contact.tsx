@@ -22,7 +22,7 @@ export default function Contact() {
   const LINE_COLOR = "bg-white/20";
 
   // ICONOS
-  const ICON_SIZE = "w-[80px]";
+  const ICON_SIZE = "w-[60px] md:w-[80px]";
   const ICON_GAP = "gap-16";
 
   // TEXTO ICONOS
@@ -31,14 +31,14 @@ export default function Contact() {
 
   // POSICION GENERAL
   const CONTENT_X = 0;
-  const CONTENT_Y = 100;
+  const CONTENT_Y = 0;
 
   // =========================
 
   return (
     <section
       id="contact"
-      className="relative z-[20] py-56 px-6 bg-transparent text-white flex items-center justify-center"
+      className="relative z-[20] py-24 md:py-56 px-6 bg-transparent text-white flex items-center justify-center"
     >
       <motion.div
         className="w-full max-w-4xl mx-auto text-center flex flex-col items-center"
@@ -61,33 +61,38 @@ export default function Contact() {
 
         {/* TEXTO + LINEAS */}
         <motion.div
-          className="flex items-center gap-6 mb-12"
+          className="flex flex-col md:flex-row items-center gap-6 mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
 
           {/* LINEA IZQUIERDA */}
-          <div className={`${LINE_WIDTH} ${LINE_HEIGHT} ${LINE_COLOR}`}></div>
+          <div className={`hidden md:block ${LINE_WIDTH} ${LINE_HEIGHT} ${LINE_COLOR}`}></div>
 
           {/* TEXTO */}
-          <p className={`${TEXT_SIZE} ${TEXT_COLOR} leading-relaxed ${TEXT_WIDTH}`}>
-            Estamos disponibles para colaborar con marcas, <br />
-            <span className="text-[#3578FF]">
-              empresas y negocios que buscan evolucionar su
-            </span>{" "}
-            <br />
-            identidad y presencia digital.
-          </p>
+          <p className="text-center leading-relaxed">
+  <span className="block">
+    Estamos disponibles para colaborar con marcas,
+  </span>
+
+  <span className="block text-[#3578FF]">
+    empresas y negocios que buscan evolucionar su
+  </span>
+
+  <span className="block">
+    identidad y presencia digital.
+  </span>
+</p>
 
           {/* LINEA DERECHA */}
-          <div className={`${LINE_WIDTH} ${LINE_HEIGHT} ${LINE_COLOR}`}></div>
+          <div className={`hidden md:block ${LINE_WIDTH} ${LINE_HEIGHT} ${LINE_COLOR}`}></div>
 
         </motion.div>
 
         {/* ICONOS */}
         <motion.div
-          className={`flex items-center ${ICON_GAP}`}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}

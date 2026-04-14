@@ -8,6 +8,19 @@ export default function Hero() {
   /* 🔧 CONTROLES EDITABLES */
   /* ============================= */
 
+const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  handleResize();
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
   const offsets: Record<string, number> = {
   services: 25,
   portfolio: 27,
@@ -37,38 +50,39 @@ const scrollToSection = (id: string) => {
   const NOISE_OPACITY = 0.08;
 
   /* 🏛 ESTATUA */
-  const STATUE_SIZE = 645;
+  const STATUE_SIZE = isMobile ? 320 : 645;
+  const STATUE_Y = isMobile ? 40 : -20;
   const STATUE_X = 0;
-  const STATUE_Y = -20;
+
 
   /* 🔥 ISOTIPO */
-  const ISOTIPO_SIZE = 90;
-  const ISO_X = 475;
-  const ISO_Y = -60;
+  const ISOTIPO_SIZE = isMobile ? 60 : 90;
+  const ISO_X = isMobile ? 0 : 475;
+  const ISO_Y = isMobile ? -180 : -60;
 
   /* ✍️ TÍTULO */
   const TITLE_LINE_1 = "Construimos";
   const TITLE_LINE_2_PART1 = "MARCAS";
   const TITLE_LINE_2_PART2 = " CON";
   const TITLE_LINE_3 = "CARÁCTER";
-  const TITLE_SMALL_SIZE = 41;
-  const TITLE_MAIN_SIZE = 57;
-  const TITLE_X = -450;
-  const TITLE_Y = -183;
-  const TITLE_ALIGN = "left";
+  const TITLE_SMALL_SIZE = isMobile ? 22 : 41;
+  const TITLE_MAIN_SIZE = isMobile ? 30 : 57;
+  const TITLE_X = isMobile ? 0 : -450;
+  const TITLE_Y = isMobile ? -120 : -183;
+  const TITLE_ALIGN = isMobile ? "center" : "left";
 
   /* ✍️ SUBTÍTULO */
   const SUBTITLE_LINE_1 = "DONDE LA ESTRATEGIA";
   const SUBTITLE_LINE_2 = "SE CONVIERTE EN UN SIMBOLO.";
-  const SUBTITLE_SIZE = 16;
-  const SUBTITLE_X = 475;
-  const SUBTITLE_Y = 25;
+  const SUBTITLE_SIZE = isMobile ? 12 : 16;
+  const SUBTITLE_X = isMobile ? 0 : 475;
+  const SUBTITLE_Y = isMobile ? -20 : 25;
 
   /* 🔘 BOTONES */
-  const BUTTON_WIDTH = 170;
-  const BUTTON_HEIGHT = 40;
-  const BUTTONS_X = 475;
-  const BUTTONS_Y = 95;
+  const BUTTON_WIDTH = isMobile ? 140 : 170;
+  const BUTTON_HEIGHT = isMobile ? 38 : 40;
+  const BUTTONS_X = isMobile ? 0 : 475;
+  const BUTTONS_Y = isMobile ? 80 : 95;
 
   /* ============================= */
   /* 🎬 ESTADOS */
@@ -82,10 +96,12 @@ const scrollToSection = (id: string) => {
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * PARALLAX_INTENSITY;
-    const y = (e.clientY / window.innerHeight - 0.5) * PARALLAX_INTENSITY;
-    setPosition({ x, y });
-  };
+  if (isMobile) return;
+
+  const x = (e.clientX / window.innerWidth - 0.5) * PARALLAX_INTENSITY;
+  const y = (e.clientY / window.innerHeight - 0.5) * PARALLAX_INTENSITY;
+  setPosition({ x, y });
+};
 
   return (
     <section
@@ -96,7 +112,9 @@ const scrollToSection = (id: string) => {
       <div
         className="absolute inset-0 transition-transform duration-300 ease-out z-0"
         style={{
-          transform: `translate(${position.x}px, ${position.y}px) scale(${BACKGROUND_SCALE})`,
+          transform: isMobile
+  ? `scale(${BACKGROUND_SCALE})`
+  : `translate(${position.x}px, ${position.y}px) scale(${BACKGROUND_SCALE})`,
           filter: `blur(${BACKGROUND_BLUR}px)`
         }}
       >
@@ -129,14 +147,17 @@ const scrollToSection = (id: string) => {
         <div className="font-extrabold text-lg">
           Vikings Estudio
         </div>
-        <div className="flex gap-10 text-sm font-semibold">
+        <div className="hidden md:flex gap-10 text-sm font-semibold">
           <button onClick={() => scrollToSection("services")} className="hover:opacity-70 transition">Servicios</button>
           <button onClick={() => scrollToSection("portfolio")} className="hover:opacity-70 transition">Portafolio</button>
           <button onClick={() => scrollToSection("contact")} className="hover:opacity-70 transition">Contacto</button>
         </div>
       </nav>
 
-      <div className="relative h-screen flex items-center justify-center">
+      <div className={`
+  relative min-h-screen flex items-center justify-center
+  ${isMobile ? "flex-col text-center px-6" : ""}
+`}>
 
         {/* 🏛 ESTATUA */}
         <img
@@ -146,9 +167,11 @@ const scrollToSection = (id: string) => {
             height: `${STATUE_SIZE}px`,
             transform: `translate(${STATUE_X}px, ${STATUE_Y}px)`
           }}
-          className={`absolute z-10 transition-all duration-[1400ms] ease-out ${
-            loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
-          }`}
+          className={`
+  z-10 transition-all duration-[1400ms] ease-out
+  ${isMobile ? "relative mt-10" : "absolute"}
+  ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}
+`}
         />
 
         {/* ✍️ TÍTULO */}
@@ -156,7 +179,7 @@ const scrollToSection = (id: string) => {
           style={{
             transform: `translate(${TITLE_X}px, ${TITLE_Y}px)`
           }}
-          className={`absolute z-30 transition-all duration-[1200ms] delay-200 ${
+          className={`absolute z-30 ${isMobile ? "text-center left-1/2 -translate-x-1/2" : ""} transition-all duration-[1200ms] delay-200 ${
             loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
           }`}
         >
@@ -175,47 +198,59 @@ const scrollToSection = (id: string) => {
         </div>
 
         {/* ✍️ SUBTÍTULO */}
-        <div
-          style={{
-            transform: `translate(${SUBTITLE_X}px, ${SUBTITLE_Y}px)`
-          }}
-          className={`absolute z-30 text-center transition-all duration-[1200ms] delay-400 ${
-            loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
-          }`}
-        >
-          <div
-            style={{
-              fontSize: `${SUBTITLE_SIZE}px`,
-              letterSpacing: "0.28em"
-            }}
-            className="font-medium"
-          >
-            <div>{SUBTITLE_LINE_1}</div>
-            <div>{SUBTITLE_LINE_2}</div>
-          </div>
-        </div>
+        {!isMobile && (
+  <div
+    style={{
+      transform: `translate(${SUBTITLE_X}px, ${SUBTITLE_Y}px)`
+    }}
+    className={`absolute z-30 text-center ${
+      isMobile ? "left-1/2 -translate-x-1/2" : ""
+    } transition-all duration-[1200ms] delay-400 ${
+      loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+    }`}
+  >
+    <div
+      style={{
+        fontSize: `${SUBTITLE_SIZE}px`,
+        letterSpacing: "0.28em"
+      }}
+      className="font-medium"
+    >
+      <div>{SUBTITLE_LINE_1}</div>
+      <div>{SUBTITLE_LINE_2}</div>
+    </div>
+  </div>
+)}
 
         {/* 🔥 ISOTIPO */}
-        <img
-          src="/isotipo.png"
-          alt="Isotipo"
-          style={{
-            height: `${ISOTIPO_SIZE}px`,
-            transform: `translate(${ISO_X}px, ${ISO_Y}px)`
-          }}
-          className={`absolute z-30 transition-all duration-[1300ms] delay-500 ${
-            loaded ? "opacity-100 scale-100" : "opacity-0 scale-75"
-          }`}
-        />
+        {!isMobile && (
+  <img
+    src="/isotipo.png"
+    alt="Isotipo"
+    style={{
+      height: `${ISOTIPO_SIZE}px`,
+      transform: `translate(${ISO_X}px, ${ISO_Y}px)`
+    }}
+    className={`absolute z-30 ${
+      isMobile ? "left-1/2 -translate-x-1/2" : ""
+    } transition-all duration-[1300ms] delay-500 ${
+      loaded ? "opacity-100 scale-100" : "opacity-0 scale-75"
+    }`}
+  />
+)}
 
         {/* 🔘 BOTONES */}
         <div
-          style={{
-            transform: `translate(${BUTTONS_X}px, ${BUTTONS_Y}px)`
-          }}
-          className={`absolute z-30 flex gap-6 transition-all duration-[1200ms] delay-700 ${
-            loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`absolute z-30 flex gap-6 ${
+  isMobile ? "flex-col items-center left-1/2 -translate-x-1/2" : ""
+} transition-all duration-[1200ms] delay-700`}
+style={{
+  transform: `
+    translate(${BUTTONS_X}px, ${BUTTONS_Y}px)
+    ${loaded ? "translateY(0px)" : "translateY(40px)"}
+  `,
+  opacity: loaded ? 1 : 0
+}}
         >
           <button
             onClick={() => scrollToSection("about")}

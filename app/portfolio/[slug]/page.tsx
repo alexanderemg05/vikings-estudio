@@ -146,23 +146,23 @@ export default function ProjectPage() {
 
       <Link
         href="/"
-        className="fixed top-8 left-8 z-50 bg-white/10 backdrop-blur-md border border-white/20 px-5 py-3 rounded-full hover:bg-white/20 transition"
+        className="fixed top-4 left-4 md:top-8 md:left-8 z-50 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 md:px-5 md:py-3 rounded-full hover:bg-white/20 transition text-sm md:text-base"
       >
         ← Back
       </Link>
 
       {/* CONTENEDOR */}
 
-      <div className="max-w-[1100px] mx-auto px-6 pt-40 pb-20">
+      <div className="max-w-[1100px] mx-auto px-6 pt-28 md:pt-40 pb-16 md:pb-20">
 
         {/* TITULO */}
 
         <div className={`flex flex-col ${titleAlign} ${TITLE_MARGIN_TOP}`}>
 
-          <h1 className="text-6xl font-extrabold leading-tight">
+          <h1 className="text-3xl md:text-6xl font-extrabold leading-tight">
 
             {project.title.map((word, i) => (
-              <span key={i} className={`${word.color} mr-4`}>
+              <span key={i} className={`${word.color} mr-2 md:mr-4`}>
                 {word.text}
               </span>
             ))}
@@ -173,7 +173,7 @@ export default function ProjectPage() {
 
         {/* IMAGEN */}
 
-        <div className="flex justify-center my-24">
+        <div className="flex justify-center my-16 md:my-24">
 
           <img
             src={project.image}
@@ -185,7 +185,7 @@ export default function ProjectPage() {
 
         {/* INFO */}
 
-        <div className="grid md:grid-cols-2 gap-16">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16">
 
           <div>
 
@@ -193,7 +193,7 @@ export default function ProjectPage() {
               PROJECT INFO
             </h3>
 
-            <p className="text-lg text-gray-200">
+            <p className="text-base md:text-lg text-gray-200">
               {project.info}
             </p>
 
@@ -205,7 +205,7 @@ export default function ProjectPage() {
               DESCRIPTION
             </h3>
 
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-sm md:text-base text-gray-300 leading-relaxed">
               {project.description}
             </p>
 

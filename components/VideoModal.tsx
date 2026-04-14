@@ -28,7 +28,7 @@ export default function VideoModal({
   return createPortal(
 
     <div
-      className="fixed inset-0 z-[9999999] bg-black/95 backdrop-blur-md flex items-center justify-center"
+      className="fixed inset-0 z-[9999999] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
       onClick={onClose}
     >
 
@@ -37,7 +37,7 @@ export default function VideoModal({
         controls
         autoPlay
         onClick={(e) => e.stopPropagation()}
-        className="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl"
+        className="absolute top-4 right-4 md:top-8 md:right-10 text-white text-3xl md:text-4xl"
       />
 
       <button
