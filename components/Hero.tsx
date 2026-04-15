@@ -105,7 +105,7 @@ const scrollToSection = (id: string) => {
 
   return (
     <section
-      onMouseMove={handleMouseMove}
+      onMouseMove={isMobile ? undefined : handleMouseMove}
       className="relative min-h-screen w-full"
     >
       {/* 🌌 Fondo */}
@@ -147,17 +147,14 @@ const scrollToSection = (id: string) => {
         <div className="font-extrabold text-lg">
           Vikings Estudio
         </div>
-        <div className="hidden md:flex gap-10 text-sm font-semibold">
+        <div className={`${isMobile ? "hidden" : "flex"} gap-10 text-sm font-semibold`}>
           <button onClick={() => scrollToSection("services")} className="hover:opacity-70 transition">Servicios</button>
           <button onClick={() => scrollToSection("portfolio")} className="hover:opacity-70 transition">Portafolio</button>
           <button onClick={() => scrollToSection("contact")} className="hover:opacity-70 transition">Contacto</button>
         </div>
       </nav>
 
-      <div className={`
-  relative min-h-screen flex items-center justify-center
-  ${isMobile ? "flex-col text-center px-6" : ""}
-`}>
+      <div className={`relative h-screen flex flex-col items-center justify-center ${isMobile ? "px-6" : ""}`}>
 
         {/* 🏛 ESTATUA */}
         <img
@@ -176,12 +173,17 @@ const scrollToSection = (id: string) => {
 
         {/* ✍️ TÍTULO */}
         <div
-          style={{
-            transform: `translate(${TITLE_X}px, ${TITLE_Y}px)`
-          }}
-          className={`absolute z-30 ${isMobile ? "text-center left-1/2 -translate-x-1/2" : ""} transition-all duration-[1200ms] delay-200 ${
-            loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
-          }`}
+          style={
+  isMobile
+    ? {}
+    : { transform: `translate(${TITLE_X}px, ${TITLE_Y}px)` }
+}
+          className={`z-30 transition-all duration-[1200ms] delay-200 ${
+  isMobile
+    ? "text-center mb-6"
+    : "absolute"
+}`}
+
         >
           <h1 className={`leading-tight ${TITLE_ALIGN === "left" ? "text-left" : "text-center"}`}>
             <div style={{ fontSize: `${TITLE_SMALL_SIZE}px` }} className="font-extrabold">
@@ -241,16 +243,16 @@ const scrollToSection = (id: string) => {
 
         {/* 🔘 BOTONES */}
         <div
-          className={`absolute z-30 flex gap-6 ${
-  isMobile ? "flex-col items-center left-1/2 -translate-x-1/2" : ""
-} transition-all duration-[1200ms] delay-700`}
-style={{
-  transform: `
-    translate(${BUTTONS_X}px, ${BUTTONS_Y}px)
-    ${loaded ? "translateY(0px)" : "translateY(40px)"}
-  `,
-  opacity: loaded ? 1 : 0
-}}
+          className={`z-30 flex gap-6 ${
+  isMobile
+    ? "flex-col items-center mt-6"
+    : "absolute"
+}`}
+style={
+  isMobile
+    ? {}
+    : { transform: `translate(${BUTTONS_X}px, ${BUTTONS_Y}px)` }
+}
         >
           <button
             onClick={() => scrollToSection("about")}
