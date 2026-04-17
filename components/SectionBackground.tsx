@@ -4,9 +4,13 @@ import React, { useState, useEffect } from "react";
 
 export default function SectionBackground() {
 
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+const [isMobile, setIsMobile] = useState(false);
+const [mounted, setMounted] = useState(false);
+const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
+useEffect(() => {
+  setMounted(true);
+
   const handleResize = () => {
     setIsMobile(window.innerWidth < 768);
   };
@@ -17,8 +21,12 @@ export default function SectionBackground() {
   return () => window.removeEventListener("resize", handleResize);
 }, []);
 
+useEffect(() => {
+  setLoaded(true);
+}, []);
+
   // 🔥 ESTA LÍNEA ES LA CLAVE
-  if (isMobile === null) return null;
+  if (!mounted) return null;
 
   /* ============================= */
   /* 🔧 CONTROLES EDITABLES */
@@ -48,23 +56,6 @@ export default function SectionBackground() {
   /* ============================= */
   /* 🎬 ESTADO PARA ANIMACIÓN */
   /* ============================= */
-
-useEffect(() => {
-  const handleResize = () => {
-    setIsMobile(window.innerWidth < 768);
-  };
-
-  handleResize();
-  window.addEventListener("resize", handleResize);
-
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
-
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
 
   return (
     <section className="absolute top-0 left-0 w-full pointer-events-none">

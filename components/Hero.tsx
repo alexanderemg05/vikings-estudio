@@ -8,7 +8,7 @@ export default function Hero() {
   /* 🔧 CONTROLES EDITABLES */
   /* ============================= */
 
-const [isMobile, setIsMobile] = useState<boolean | null>(null);
+const [isMobile, setIsMobile] = useState(false);
 
 useEffect(() => {
   const handleResize = () => {

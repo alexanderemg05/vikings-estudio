@@ -9,9 +9,12 @@ export default function Services({
   activeVideo?: string | null
 }) {
 
-const [isMobile, setIsMobile] = useState<boolean | null>(null);
+const [isMobile, setIsMobile] = useState(false);
+const [mounted, setMounted] = useState(false);
 
 useEffect(() => {
+  setMounted(true);
+
   const handleResize = () => {
     setIsMobile(window.innerWidth < 768);
   };
