@@ -119,7 +119,7 @@ const scrollToSection = (id: string) => {
         }}
       >
         <img
-          src="/fondo.jpg"
+          src={isMobile ? "/fondo-mobile.png" : "/fondo.jpg"}
           alt="Paisaje"
           className="h-full w-full object-cover"
         />
@@ -141,7 +141,7 @@ const scrollToSection = (id: string) => {
       />
 
       {/* 🧭 NAVBAR */}
-      <nav className={`relative z-30 px-7 py-6 flex justify-between items-center transition-all duration-1000 ${
+      <nav className={`relative z-[100] px-7 py-6 flex justify-between items-center transition-all duration-1000 ${
         loaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
       }`}>
         <div className="font-extrabold text-lg">
@@ -154,7 +154,7 @@ const scrollToSection = (id: string) => {
         </div>
       </nav>
 
-      <div className={`relative h-screen flex flex-col items-center justify-center ${isMobile ? "px-6" : ""}`}>
+      <div className={`relative min-h-screen flex flex-col items-center justify-center ${isMobile ? "px-6 pt-32" : ""}`}>
 
         {/* 🏛 ESTATUA */}
         <img

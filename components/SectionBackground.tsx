@@ -4,6 +4,22 @@ import React, { useState, useEffect } from "react";
 
 export default function SectionBackground() {
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // 🔥 ESTA LÍNEA ES LA CLAVE
+  if (isMobile) return null;
+
   /* ============================= */
   /* 🔧 CONTROLES EDITABLES */
   /* ============================= */
@@ -32,7 +48,6 @@ export default function SectionBackground() {
   /* ============================= */
   /* 🎬 ESTADO PARA ANIMACIÓN */
   /* ============================= */
-const [isMobile, setIsMobile] = useState(false);
 
 useEffect(() => {
   const handleResize = () => {
@@ -52,11 +67,11 @@ useEffect(() => {
   }, []);
 
   return (
-    <section className="absolute top-0 left-0 w-full h-full pointer-events-none">
+    <section className="absolute top-[100vh] left-0 w-full pointer-events-none">
 
       {/* Fondo nuevo */}
       <div
-        className="absolute inset-0 w-full pointer-events-none z-20"
+        className="absolute inset-0 -z-10 pointer-events-none"
         style={{
           transform: `translateY(${SECTION_BG_Y}px) scale(${SECTION_BG_SCALE})`,
           opacity: SECTION_BG_OPACITY,
