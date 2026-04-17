@@ -9,7 +9,7 @@ export default function Services({
   activeVideo?: string | null
 }) {
 
-const [isMobile, setIsMobile] = useState(false);
+const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
 useEffect(() => {
   const handleResize = () => {

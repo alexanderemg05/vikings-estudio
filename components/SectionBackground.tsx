@@ -4,18 +4,18 @@ import React, { useState, useEffect } from "react";
 
 export default function SectionBackground() {
 
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
+  handleResize();
+  window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
 
   // 🔥 ESTA LÍNEA ES LA CLAVE
   if (isMobile) return null;
@@ -67,7 +67,7 @@ useEffect(() => {
   }, []);
 
   return (
-    <section className="absolute top-[100vh] left-0 w-full pointer-events-none">
+    <section className="absolute top-0 left-0 w-full pointer-events-none">
 
       {/* Fondo nuevo */}
       <div
