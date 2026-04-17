@@ -18,7 +18,7 @@ export default function SectionBackground() {
 }, []);
 
   // 🔥 ESTA LÍNEA ES LA CLAVE
-  if (isMobile) return null;
+  if (isMobile === null) return null;
 
   /* ============================= */
   /* 🔧 CONTROLES EDITABLES */
