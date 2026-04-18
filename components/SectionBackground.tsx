@@ -49,7 +49,7 @@ useEffect(() => {
   const SERVICE_4_Y = -300;
 
   /* 🎨 FONDO SECCIONES */
-  const SECTION_BG_Y = -1050;
+  const SECTION_BG_Y = isMobile ? -400 : -1050;
   const SECTION_BG_SCALE = 1;
   const SECTION_BG_OPACITY = 1;
 
@@ -58,7 +58,7 @@ useEffect(() => {
   /* ============================= */
 
   return (
-    <section className="absolute top-0 left-0 w-full pointer-events-none">
+    <section className="absolute top-0 left-0 w-full h-[200vh] pointer-events-none">
 
       {/* Fondo nuevo */}
       <div
@@ -66,7 +66,7 @@ useEffect(() => {
         style={{
           transform: `translateY(${SECTION_BG_Y}px) scale(${SECTION_BG_SCALE})`,
           opacity: SECTION_BG_OPACITY,
-          zIndex: 20
+          zIndex: isMobile ? 0 : 20
         }}
       >
         <img

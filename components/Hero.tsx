@@ -113,7 +113,7 @@ const scrollToSection = (id: string) => {
         className="absolute inset-0 transition-transform duration-300 ease-out z-0"
         style={{
           transform: isMobile
-  ? `scale(${BACKGROUND_SCALE})`
+  ? `scale(${BACKGROUND_SCALE}) translateY(-40px)`
   : `translate(${position.x}px, ${position.y}px) scale(${BACKGROUND_SCALE})`,
           filter: `blur(${BACKGROUND_BLUR}px)`
         }}
@@ -154,7 +154,9 @@ const scrollToSection = (id: string) => {
         </div>
       </nav>
 
-      <div className={`relative min-h-screen flex flex-col items-center justify-center ${isMobile ? "px-6 pt-32" : ""}`}>
+      <div className={`relative min-h-screen flex flex-col items-center ${
+  isMobile ? "justify-start px-6 pt-20" : "justify-center"
+}`}>
 
         {/* 🏛 ESTATUA */}
         <img
