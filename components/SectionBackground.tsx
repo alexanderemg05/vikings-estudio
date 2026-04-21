@@ -33,7 +33,7 @@ useEffect(() => {
   /* ============================= */
 
   /* 🔢 SERVICIOS */
-  const SERVICES_Y = 140;
+  const SERVICES_Y = isMobile ? 0 : 140;
   const SERVICES_SIZE = 14;
 
   const SERVICE_1_X = -280;
@@ -49,7 +49,7 @@ useEffect(() => {
   const SERVICE_4_Y = -300;
 
   /* 🎨 FONDO SECCIONES */
-  const SECTION_BG_Y = isMobile ? -400 : -1050;
+  const SECTION_BG_Y = -1050;
   const SECTION_BG_SCALE = 1;
   const SECTION_BG_OPACITY = 1;
 
@@ -58,13 +58,15 @@ useEffect(() => {
   /* ============================= */
 
   return (
-    <section className="absolute top-0 left-0 w-full h-[200vh] pointer-events-none">
+    <section className="relative w-full pointer-events-none pt-10 md:pt-0">
 
       {/* Fondo nuevo */}
       <div
         className="absolute inset-0 -z-10 pointer-events-none"
         style={{
-          transform: `translateY(${SECTION_BG_Y}px) scale(${SECTION_BG_SCALE})`,
+          transform: isMobile
+  ? "none"
+  : `translateY(${SECTION_BG_Y}px) scale(${SECTION_BG_SCALE})`,
           opacity: SECTION_BG_OPACITY,
           zIndex: isMobile ? 0 : 20
         }}
@@ -78,7 +80,9 @@ useEffect(() => {
 
       {/* 🔢 SERVICIOS */}
       <div
-        style={{ transform: `translateY(${SERVICES_Y}px)` }}
+        style={{
+  transform: isMobile ? "none" : `translateY(${SERVICES_Y}px)`
+}}
         className={`relative z-[30] w-full pb-32 ${
   isMobile
     ? "flex flex-col items-center gap-8"

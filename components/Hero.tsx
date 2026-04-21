@@ -113,7 +113,7 @@ const scrollToSection = (id: string) => {
         className="absolute inset-0 transition-transform duration-300 ease-out z-0"
         style={{
           transform: isMobile
-  ? `scale(${BACKGROUND_SCALE}) translateY(-40px)`
+  ? `scale(${BACKGROUND_SCALE})`
   : `translate(${position.x}px, ${position.y}px) scale(${BACKGROUND_SCALE})`,
           filter: `blur(${BACKGROUND_BLUR}px)`
         }}
@@ -140,22 +140,8 @@ const scrollToSection = (id: string) => {
         }}
       />
 
-      {/* 🧭 NAVBAR */}
-      <nav className={`relative z-[100] px-7 py-6 flex justify-between items-center transition-all duration-1000 ${
-        loaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
-      }`}>
-        <div className="font-extrabold text-lg">
-          Vikings Estudio
-        </div>
-        <div className={`${isMobile ? "hidden" : "flex"} gap-10 text-sm font-semibold`}>
-          <button onClick={() => scrollToSection("services")} className="hover:opacity-70 transition">Servicios</button>
-          <button onClick={() => scrollToSection("portfolio")} className="hover:opacity-70 transition">Portafolio</button>
-          <button onClick={() => scrollToSection("contact")} className="hover:opacity-70 transition">Contacto</button>
-        </div>
-      </nav>
-
       <div className={`relative min-h-screen flex flex-col items-center ${
-  isMobile ? "justify-start px-6 pt-20" : "justify-center"
+  isMobile ? "justify-start px-6 pt-28" : "justify-center"
 }`}>
 
         {/* 🏛 ESTATUA */}
@@ -168,7 +154,7 @@ const scrollToSection = (id: string) => {
           }}
           className={`
   z-10 transition-all duration-[1400ms] ease-out
-  ${isMobile ? "relative mt-10" : "absolute"}
+  ${isMobile ? "relative mt-6" : "absolute"}
   ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}
 `}
         />
@@ -247,7 +233,7 @@ const scrollToSection = (id: string) => {
         <div
           className={`z-30 flex gap-6 ${
   isMobile
-    ? "flex-col items-center mt-6"
+    ? "flex-col items-center mt-4"
     : "absolute"
 }`}
 style={
