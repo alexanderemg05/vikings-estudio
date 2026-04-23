@@ -88,14 +88,14 @@ useEffect(() => {
   return (
     <section
   onMouseMove={isMobile ? undefined : handleMouseMove}
-  className="relative min-h-screen w-full"
+  className="relative min-h-screen w-full overflow-hidden"
 >
 
        <Navbar />
     
       {/* 🌌 Fondo */}
       <div
-        className="absolute inset-0 z-0"
+        className="absolute -inset-10 z-0"
         style={{
           transform: isMobile
   ? `scale(${BACKGROUND_SCALE})`
@@ -111,7 +111,7 @@ useEffect(() => {
       </div>
 
       <div
-        className="absolute inset-0 z-0"
+        className="absolute -inset-10 z-0"
         style={{
           backgroundColor: `rgba(0,0,0,${BACKGROUND_DARKNESS})`
         }}
@@ -125,7 +125,7 @@ useEffect(() => {
         }}
       />
 
-      <div className={`relative min-h-[112vh] flex flex-col items-center ${
+      <div className={`relative min-h-screen flex flex-col items-center ${
   isMobile ? "justify-center px-6 pt-32" : "justify-center"
 }`}>
 
