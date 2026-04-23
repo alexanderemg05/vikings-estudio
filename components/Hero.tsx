@@ -26,7 +26,7 @@ useEffect(() => {
 
   /* 🌌 HERO */
   const PARALLAX_INTENSITY = 8;
-  const BACKGROUND_SCALE = 1.15;
+  const BACKGROUND_SCALE = 1;
   const BACKGROUND_BLUR = 1;
   const BACKGROUND_DARKNESS = 0.35;
   const NOISE_OPACITY = 0.08;
