@@ -25,15 +25,10 @@ body {
 }
 
 .hero-bg {
-  position: absolute;
   width: 110%;
   height: 110%;
   top: -5%;
   left: -5%;
-  background-image: url("/fondo.jpg");
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.1s ease-out;
 }
 
 /* 👇 SOLO móvil */
