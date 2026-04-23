@@ -19,7 +19,7 @@ body {
 
 .hero {
   position: relative;
-  height: 100dvh; /* 🔥 cambio clave */
+  min-height: 100vh; /* 🔥 CAMBIO IMPORTANTE */
   overflow: hidden;
   color: white;
 }

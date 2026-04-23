@@ -27,16 +27,29 @@ export default function ServiceModal({ service, closeModal }: ServiceModalProps)
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    console.log({
-      service,
-      ...form
-    });
+  try {
+    await emailjs.send(
+      "service_fpzsezm",
+      "template_thidarp",
+      {
+        service: service,
+        name: form.name,
+        email: form.email,
+        message: form.message,
+      },
+      "dfLIXoLUg5UcMyWF5"
+    );
 
     setSent(true);
-  };
+
+  } catch (error) {
+    console.error("Error al enviar:", error);
+    alert("Hubo un error al enviar el mensaje");
+  }
+};
 
   if (!service) return null;
 

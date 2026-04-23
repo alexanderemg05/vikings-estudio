@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import SectionBackground from "@/components/SectionBackground";
 import Portfolio from "@/components/Portfolio";
@@ -10,7 +11,7 @@ export default function Home() {
 
   return (
     <main className="relative w-full text-white bg-black">
-
+  
       <Hero />
 
       <div className="relative">

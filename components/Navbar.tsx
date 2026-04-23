@@ -1,32 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { scrollToSection } from "@/utils/scrollToSection";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const offsets: Record<string, number> = {
-    services: 100,
-    portfolio: 100,
-    about: 140,
-    contact: 180
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
 
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-
-    const offset = offsets[id] || 100;
-
-    const y = el.getBoundingClientRect().top + window.scrollY - offset;
-
-    window.scrollTo({
-      top: y,
-      behavior: "smooth"
-    });
-
-    setOpen(false);
-  };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (open) {
@@ -41,18 +29,39 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <nav className="fixed w-full bg-black/40 backdrop-blur-lg backdrop-blur-md z-50 px-6 py-4 flex justify-between items-center">
+    <nav className="absolute top-0 left-0 w-full z-[50] px-6 py-6 flex justify-between items-center">
       
-      <div className="text-2xl font-bold text-white">
-        Vikings Estudio
-      </div>
+      <div className="flex items-center gap-3 text-white font-bold">
+  <img
+    src="/iso.png"
+    alt="Isotipo"
+    className="h-6 w-auto md:h-8"
+  />
+  <span className="text-base md:text-xl">
+    Vikings Estudio
+  </span>
+</div>
 
       {/* DESKTOP */}
       <div className="hidden md:flex gap-8 text-white font-semibold">
-        <button onClick={() => scrollToSection("services")} className="hover:text-[#6B9CFF] transition">Servicios</button>
-        <button onClick={() => scrollToSection("portfolio")} className="hover:text-[#6B9CFF] transition">Portafolio</button>
-        <button onClick={() => scrollToSection("about")} className="hover:text-[#6B9CFF] transition">Sobre mí</button>
-        <button onClick={() => scrollToSection("contact")} className="hover:text-[#6B9CFF] transition">Contacto</button>
+        <button
+          onClick={() => scrollToSection("services")}
+          className="hover:text-[#6B9CFF] transition"
+        >
+          Servicios
+        </button>
+        <button
+          onClick={() => scrollToSection("portfolio")}
+          className="hover:text-[#6B9CFF] transition"
+        >
+          Portafolio
+        </button>
+        <button
+          onClick={() => scrollToSection("contact")}
+          className="hover:text-[#6B9CFF] transition"
+        >
+          Contacto
+        </button>
       </div>
 
       {/* MOBILE BUTTON */}
@@ -71,10 +80,33 @@ export default function Navbar() {
           open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
-        <button onClick={() => scrollToSection("services")} className="text-white font-semibold hover:text-[#6B9CFF] transition">Servicios</button>
-        <button onClick={() => scrollToSection("portfolio")} className="text-white font-semibold hover:text-[#6B9CFF] transition">Portafolio</button>
-        <button onClick={() => scrollToSection("about")} className="text-white font-semibold hover:text-[#6B9CFF] transition">Sobre mí</button>
-        <button onClick={() => scrollToSection("contact")} className="text-white font-semibold hover:text-[#6B9CFF] transition">Contacto</button>
+        <button
+          onClick={() => {
+            scrollToSection("services");
+            setOpen(false);
+          }}
+          className="text-white font-semibold hover:text-[#6B9CFF] transition"
+        >
+          Servicios
+        </button>
+        <button
+          onClick={() => {
+            scrollToSection("portfolio");
+            setOpen(false);
+          }}
+          className="text-white font-semibold hover:text-[#6B9CFF] transition"
+        >
+          Portafolio
+        </button>
+        <button
+          onClick={() => {
+            scrollToSection("contact");
+            setOpen(false);
+          }}
+          className="text-white font-semibold hover:text-[#6B9CFF] transition"
+        >
+          Contacto
+        </button>
       </div>
 
     </nav>

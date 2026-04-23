@@ -5,12 +5,9 @@ import React, { useState, useEffect } from "react";
 export default function SectionBackground() {
 
 const [isMobile, setIsMobile] = useState(false);
-const [mounted, setMounted] = useState(false);
 const [loaded, setLoaded] = useState(false);
 
 useEffect(() => {
-  setMounted(true);
-
   const handleResize = () => {
     setIsMobile(window.innerWidth < 768);
   };
@@ -25,8 +22,6 @@ useEffect(() => {
   setLoaded(true);
 }, []);
 
-  // 🔥 ESTA LÍNEA ES LA CLAVE
-  if (!mounted) return null;
 
   /* ============================= */
   /* 🔧 CONTROLES EDITABLES */
@@ -58,7 +53,7 @@ useEffect(() => {
   /* ============================= */
 
   return (
-    <section className="relative w-full pointer-events-none pt-10 md:pt-0">
+    <section className="absolute top-0 left-0 w-full pointer-events-none">
 
       {/* Fondo nuevo */}
       <div

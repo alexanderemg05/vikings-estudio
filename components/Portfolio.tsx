@@ -205,7 +205,7 @@ const prev = () => {
   visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
 }`}>
     <div className="text-yellow-400 text-sm font-bold mb-3">01</div>
-    <h3 className="font-bold mb-3">DISEÑO & BRANDING</h3>
+    <h3 className="font-bold mb-3">DISEÑO & <span className="text-[#3578FF]">BRANDING</span></h3>
     <p className="text-xs text-gray-300 leading-relaxed">
       Sistemas visuales estratégicos: branding,
       logotipos, social media, packaging y piezas
@@ -218,7 +218,7 @@ const prev = () => {
   visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
 }`}>
     <div className="text-yellow-400 text-sm font-bold mb-3">02</div>
-    <h3 className="font-bold mb-3">MOTION & ANIMACIÓN</h3>
+    <h3 className="font-bold mb-3">MOTION & <span className="text-[#3578FF]">ANIMACIÓN</span></h3>
     <p className="text-xs text-gray-300 leading-relaxed">
       Animación de logos, motion graphics y edición
       de video para llevar la identidad visual a un
@@ -351,7 +351,7 @@ const prev = () => {
         motionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
-      MOTION & <span className="text-[#6B9CFF]">VIDEO</span>
+      MOTION & <span className="text-[#3578FF]">VIDEO</span>
     </h2>
 
     <p

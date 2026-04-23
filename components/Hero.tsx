@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Navbar from "./Navbar";
+import { scrollToSection } from "@/utils/scrollToSection";
 
 export default function Hero() {
 
@@ -21,32 +23,12 @@ useEffect(() => {
   return () => window.removeEventListener("resize", handleResize);
 }, []);
 
-  const offsets: Record<string, number> = {
-  services: 25,
-  portfolio: 27,
-  about: -90,   // 👈 más abajo "Conóceme"
-  contact: -70  // 👈 más abajo "Trabajemos Juntos"
-};
-
-const scrollToSection = (id: string) => {
-  const el = document.getElementById(id);
-  if (!el) return;
-
-  const offset = offsets[id] || 100;
-
-  const y = el.getBoundingClientRect().top + window.scrollY - offset;
-
-  window.scrollTo({
-    top: y,
-    behavior: "smooth"
-  });
-};
 
   /* 🌌 HERO */
-  const PARALLAX_INTENSITY = 5;
-  const BACKGROUND_SCALE = 1;
+  const PARALLAX_INTENSITY = 8;
+  const BACKGROUND_SCALE = 1.15;
   const BACKGROUND_BLUR = 1;
-  const BACKGROUND_DARKNESS = 0.5;
+  const BACKGROUND_DARKNESS = 0.35;
   const NOISE_OPACITY = 0.08;
 
   /* 🏛 ESTATUA */
@@ -58,7 +40,7 @@ const scrollToSection = (id: string) => {
   /* 🔥 ISOTIPO */
   const ISOTIPO_SIZE = isMobile ? 60 : 90;
   const ISO_X = isMobile ? 0 : 475;
-  const ISO_Y = isMobile ? -180 : -60;
+  const ISO_Y = isMobile ? -180 : -50;
 
   /* ✍️ TÍTULO */
   const TITLE_LINE_1 = "Construimos";
@@ -68,7 +50,7 @@ const scrollToSection = (id: string) => {
   const TITLE_SMALL_SIZE = isMobile ? 22 : 41;
   const TITLE_MAIN_SIZE = isMobile ? 30 : 57;
   const TITLE_X = isMobile ? 0 : -450;
-  const TITLE_Y = isMobile ? -120 : -183;
+  const TITLE_Y = isMobile ? -120 : -150;
   const TITLE_ALIGN = isMobile ? "center" : "left";
 
   /* ✍️ SUBTÍTULO */
@@ -76,13 +58,13 @@ const scrollToSection = (id: string) => {
   const SUBTITLE_LINE_2 = "SE CONVIERTE EN UN SIMBOLO.";
   const SUBTITLE_SIZE = isMobile ? 12 : 16;
   const SUBTITLE_X = isMobile ? 0 : 475;
-  const SUBTITLE_Y = isMobile ? -20 : 25;
+  const SUBTITLE_Y = isMobile ? -20 : 45;
 
   /* 🔘 BOTONES */
   const BUTTON_WIDTH = isMobile ? 140 : 170;
   const BUTTON_HEIGHT = isMobile ? 38 : 40;
   const BUTTONS_X = isMobile ? 0 : 475;
-  const BUTTONS_Y = isMobile ? 80 : 95;
+  const BUTTONS_Y = isMobile ? 80 : 115;
 
   /* ============================= */
   /* 🎬 ESTADOS */
@@ -105,12 +87,15 @@ const scrollToSection = (id: string) => {
 
   return (
     <section
-      onMouseMove={isMobile ? undefined : handleMouseMove}
-      className="relative min-h-screen w-full"
-    >
+  onMouseMove={isMobile ? undefined : handleMouseMove}
+  className="relative min-h-screen w-full"
+>
+
+       <Navbar />
+    
       {/* 🌌 Fondo */}
       <div
-        className="absolute inset-0 transition-transform duration-300 ease-out z-0"
+        className="absolute inset-0 z-0"
         style={{
           transform: isMobile
   ? `scale(${BACKGROUND_SCALE})`
@@ -121,7 +106,7 @@ const scrollToSection = (id: string) => {
         <img
           src={isMobile ? "/fondo-mobile.png" : "/fondo.jpg"}
           alt="Paisaje"
-          className="h-full w-full object-cover"
+          className="min-h-full w-full object-cover"
         />
       </div>
 
@@ -140,8 +125,8 @@ const scrollToSection = (id: string) => {
         }}
       />
 
-      <div className={`relative min-h-screen flex flex-col items-center ${
-  isMobile ? "justify-start px-6 pt-28" : "justify-center"
+      <div className={`relative min-h-[112vh] flex flex-col items-center ${
+  isMobile ? "justify-center px-6 pt-32" : "justify-center"
 }`}>
 
         {/* 🏛 ESTATUA */}
@@ -170,6 +155,8 @@ const scrollToSection = (id: string) => {
   isMobile
     ? "text-center mb-6"
     : "absolute"
+} ${
+  loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
 }`}
 
         >
@@ -178,7 +165,7 @@ const scrollToSection = (id: string) => {
               {TITLE_LINE_1}
             </div>
             <div style={{ fontSize: `${TITLE_MAIN_SIZE}px` }} className="font-extrabold">
-              <span className="text-[#6B9CFF]">{TITLE_LINE_2_PART1}</span>
+              <span className="text-[#3578FF]">{TITLE_LINE_2_PART1}</span>
               {TITLE_LINE_2_PART2}
             </div>
             <div style={{ fontSize: `${TITLE_MAIN_SIZE}px` }} className="font-extrabold">
@@ -231,10 +218,12 @@ const scrollToSection = (id: string) => {
 
         {/* 🔘 BOTONES */}
         <div
-          className={`z-30 flex gap-6 ${
+          className={`z-30 flex gap-6 transition-all duration-[1200ms] delay-500 ${
   isMobile
-    ? "flex-col items-center mt-4"
+    ? "flex-row justify-center items-center mt-6"
     : "absolute"
+} ${
+  loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
 }`}
 style={
   isMobile
