@@ -88,7 +88,7 @@ useEffect(() => {
   return (
     <section
   onMouseMove={isMobile ? undefined : handleMouseMove}
-  className="relative min-h-screen w-full"
+  className="relative min-h-screen w-full overflow-hidden"
 >
 
        <Navbar />
@@ -106,7 +106,7 @@ useEffect(() => {
         <img
           src={isMobile ? "/fondo-mobile.png" : "/fondo.jpg"}
           alt="Paisaje"
-          className="min-h-full w-full object-cover"
+          className="w-full h-full object-cover"
         />
       </div>
 
@@ -125,7 +125,7 @@ useEffect(() => {
         }}
       />
 
-      <div className={`relative min-h-[112vh] flex flex-col items-center ${
+      <div className={`relative min-h-screen flex flex-col items-center ${
   isMobile ? "justify-center px-6 pt-32" : "justify-center"
 }`}>
 
