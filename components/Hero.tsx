@@ -25,7 +25,7 @@ useEffect(() => {
 
 
   /* 🌌 HERO */
-  const PARALLAX_INTENSITY = 8;
+  const PARALLAX_INTENSITY = 4;
   const BACKGROUND_SCALE = 1;
   const BACKGROUND_BLUR = 1;
   const BACKGROUND_DARKNESS = 0.35;
@@ -80,8 +80,13 @@ useEffect(() => {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
   if (isMobile) return;
 
-  const x = (e.clientX / window.innerWidth - 0.5) * PARALLAX_INTENSITY;
-  const y = (e.clientY / window.innerHeight - 0.5) * PARALLAX_INTENSITY;
+  let x = (e.clientX / window.innerWidth - 0.5) * PARALLAX_INTENSITY;
+  let y = (e.clientY / window.innerHeight - 0.5) * PARALLAX_INTENSITY;
+
+  // 🔥 límite para evitar overflow visual
+  x = Math.max(Math.min(x, 10), -10);
+  y = Math.max(Math.min(y, 10), -10);
+
   setPosition({ x, y });
 };
 
