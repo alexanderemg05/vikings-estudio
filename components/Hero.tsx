@@ -100,11 +100,11 @@ useEffect(() => {
     
       {/* 🌌 Fondo */}
       <div
-        className="absolute inset-0 z-0"
+        className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] z-0"
         style={{
           transform: isMobile
-  ? `scale(${BACKGROUND_SCALE})`
-  : `translate(${position.x}px, ${position.y}px) scale(${BACKGROUND_SCALE})`,
+  ? `scale(1)`
+  : `translate(${position.x}px, ${position.y}px) scale(1.05)`,
           filter: `blur(${BACKGROUND_BLUR}px)`
         }}
       >
