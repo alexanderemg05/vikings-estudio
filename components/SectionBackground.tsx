@@ -41,77 +41,94 @@ export default function SectionBackground() {
   ] as const;
 
   return (
-    <section className="absolute top-0 left-0 w-full pointer-events-none">
-      {/* Fondo nuevo (solo desktop) */}
-      {!isMobile && (
-        <div
-          className="absolute inset-0 -z-10 pointer-events-none"
-          style={{
-            transform: `translateY(${SECTION_BG_Y}px) scale(${SECTION_BG_SCALE})`,
-            opacity: SECTION_BG_OPACITY,
-            zIndex: 20,
-          }}
-        >
-          <img src="/section-bg.png" alt="Fondo secciones" className="w-full object-cover" />
-        </div>
-      )}
+  <section className="absolute top-0 left-0 w-full pointer-events-none">
+    
+    {/* 🎨 FONDO DESKTOP (imagen) */}
+    {!isMobile && (
+      <div
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          transform: `translateY(${SECTION_BG_Y}px) scale(${SECTION_BG_SCALE})`,
+          opacity: SECTION_BG_OPACITY,
+          zIndex: 20,
+        }}
+      >
+        <img src="/section-bg.png" alt="Fondo secciones" className="w-full object-cover" />
+      </div>
+    )}
 
-      {/* 🔢 SERVICIOS */}
-      {isMobile ? (
-        /* 📱 MOBILE: 4 en fila, pequeños, abajo del hero */
-        <div
-          className="relative z-[30] w-full px-4 pb-8 -mt-4 grid grid-cols-4 gap-2"
-        >
-          {services.map(([num, text], i) => (
-            <div
-              key={i}
-              className="text-left transition-all duration-1000"
-              style={{
-                transitionDelay: `${900 + i * 150}ms`,
-                opacity: loaded ? 1 : 0,
-                transform: loaded ? "translateY(0px)" : "translateY(20px)",
-              }}
-            >
-              <div className="text-yellow-400 font-bold text-[11px] italic">
-                {num}
-              </div>
-              <div
-                style={{ fontSize: "11px", lineHeight: "1.25" }}
-                className="font-bold text-white"
-              >
-                {text}
-              </div>
+    {/* 🎨 FONDO MOBILE (degradado radial) */}
+    {isMobile && (
+      <div
+        className="absolute left-0 w-full pointer-events-none"
+        style={{
+          top: "-100vh",
+          height: "200vh",
+          zIndex: 0,
+          backgroundImage: `
+            radial-gradient(at 20% 20%, #0C131E 0px, transparent 50%),
+            radial-gradient(at 80% 0%, #10213e 0px, transparent 50%),
+            radial-gradient(at 0% 80%, #173c87 0px, transparent 50%),
+            radial-gradient(at 80% 80%, #0C131E 0px, transparent 50%)
+          `,
+          backgroundColor: "#0C131E",
+        }}
+      />
+    )}
+
+    {/* 🔢 SERVICIOS */}
+    {isMobile ? (
+      /* 📱 MOBILE: 4 en fila, centrados, más arriba */
+      <div className="relative z-[30] w-full px-5 pb-10 -mt-16 flex justify-between items-start gap-3">
+        {services.map(([num, text], i) => (
+          <div
+            key={i}
+            className="flex-1 text-center transition-all duration-1000"
+            style={{
+              transitionDelay: `${900 + i * 150}ms`,
+              opacity: loaded ? 1 : 0,
+              transform: loaded ? "translateY(0px)" : "translateY(20px)",
+            }}
+          >
+            <div className="text-yellow-400 font-bold italic text-[11px] mb-1">
+              {num}
             </div>
-          ))}
-        </div>
-      ) : (
-        /* 🖥 DESKTOP: layout original con translates absolutos */
-        <div
-          style={{ transform: `translateY(${SERVICES_Y}px)` }}
-          className="relative z-[30] w-full pb-32 flex justify-center gap-20"
-        >
-          {services.map(([num, text, x, y], i) => (
             <div
-              key={i}
-              className="transition-all duration-1000 text-left"
-              style={{
-                transform: `translate(${x}px, ${y}px)`,
-                transitionDelay: `${900 + i * 200}ms`,
-                opacity: loaded ? 1 : 0,
-                translate: loaded ? "0px 0px" : "0px 40px",
-              }}
+              style={{ fontSize: "10.5px", lineHeight: "1.25" }}
+              className="font-bold text-white"
             >
-              <div className="text-yellow-400 font-bold">{num}</div>
-              <div
-                style={{ fontSize: `${SERVICES_SIZE}px` }}
-                className="font-bold"
-              >
-                {text}
-              </div>
+              {text}
             </div>
-          ))}
-        </div>
-      )}
-    </section>
-  );
-}
+          </div>
+        ))}
+      </div>
+    ) : (
+      /* 🖥 DESKTOP: layout original con translates absolutos */
+      <div
+        style={{ transform: `translateY(${SERVICES_Y}px)` }}
+        className="relative z-[30] w-full pb-32 flex justify-center gap-20"
+      >
+        {services.map(([num, text, x, y], i) => (
+          <div
+            key={i}
+            className="transition-all duration-1000 text-left"
+            style={{
+              transform: `translate(${x}px, ${y}px)`,
+              transitionDelay: `${900 + i * 200}ms`,
+              opacity: loaded ? 1 : 0,
+              translate: loaded ? "0px 0px" : "0px 40px",
+            }}
+          >
+            <div className="text-yellow-400 font-bold">{num}</div>
+            <div
+              style={{ fontSize: `${SERVICES_SIZE}px` }}
+              className="font-bold"
+            >
+              {text}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </section>
+  )}

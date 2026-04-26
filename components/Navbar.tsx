@@ -30,16 +30,16 @@ export default function Navbar() {
     <nav className="absolute top-0 left-0 w-full z-[50] px-5 py-5 md:px-6 md:py-6 flex justify-between items-center">
       
       {/* LOGO */}
-      <div className="flex items-center gap-2 md:gap-3 text-white font-bold">
-        <img
-          src="/iso.png"
-          alt="Isotipo"
-          className="hidden md:block h-6 w-auto md:h-8"
-        />
-        <span className="text-lg md:text-xl border-b-2 border-[#3578FF] md:border-b-0 pb-0.5 md:pb-0">
-          Vikings Estudio
-        </span>
-      </div>
+<div className="flex items-center gap-2 md:gap-3 text-white font-bold">
+  <img
+    src="/iso.png"
+    alt="Isotipo"
+    className="h-6 w-auto md:h-8"
+  />
+  <span className="text-lg md:text-xl border-b-2 border-[#3578FF] md:border-b-0 pb-0.5 md:pb-0">
+    Vikings Estudio
+  </span>
+</div>
 
       {/* DESKTOP MENU */}
       <div className="hidden md:flex gap-8 text-white font-semibold">
@@ -68,7 +68,7 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       <div
         className={`absolute top-full left-0 w-full bg-[#1F2127]/95 backdrop-blur-md flex flex-col items-center py-6 gap-6 md:hidden transition-all duration-300 ${
-          open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+          open ? "opacity-85 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
         <button
