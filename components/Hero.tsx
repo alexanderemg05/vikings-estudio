@@ -40,7 +40,7 @@ useEffect(() => {
   /* 🔥 ISOTIPO */
   const ISOTIPO_SIZE = isMobile ? 60 : 90;
   const ISO_X = isMobile ? 0 : 475;
-  const ISO_Y = isMobile ? -180 : -50;
+  const ISO_Y = isMobile ? -180 : -20;
 
   /* ✍️ TÍTULO */
   const TITLE_LINE_1 = "Construimos";
@@ -58,13 +58,13 @@ useEffect(() => {
   const SUBTITLE_LINE_2 = "SE CONVIERTE EN UN SIMBOLO.";
   const SUBTITLE_SIZE = isMobile ? 12 : 16;
   const SUBTITLE_X = isMobile ? 0 : 475;
-  const SUBTITLE_Y = isMobile ? -20 : 45;
+  const SUBTITLE_Y = isMobile ? -20 : 70;
 
   /* 🔘 BOTONES */
   const BUTTON_WIDTH = isMobile ? 140 : 170;
   const BUTTON_HEIGHT = isMobile ? 38 : 40;
   const BUTTONS_X = isMobile ? 0 : 475;
-  const BUTTONS_Y = isMobile ? 80 : 115;
+  const BUTTONS_Y = isMobile ? 80 : 140;
 
   /* ============================= */
   /* 🎬 ESTADOS */

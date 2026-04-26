@@ -28,7 +28,7 @@ useEffect(() => {
   /* ============================= */
 
   /* 🔢 SERVICIOS */
-  const SERVICES_Y = isMobile ? 0 : 140;
+  const SERVICES_Y = isMobile ? 0 : 210;
   const SERVICES_SIZE = 14;
 
   const SERVICE_1_X = -280;
