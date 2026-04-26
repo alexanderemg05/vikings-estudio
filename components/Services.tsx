@@ -9,6 +9,8 @@ export default function Services({
   activeVideo?: string | null
 }) {
 
+  const [activeSlide, setActiveSlide] = useState(0);
+const carouselRef = useRef<HTMLDivElement | null>(null);
 const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
 useEffect(() => {
@@ -89,6 +91,24 @@ const LINE_SCALE = isMobile ? 1 : 1.4;
 const BRANDING_POSITION = "mt-[-170px] translate-x-[0px]";
 const MOTION_POSITION = "mt-[-250px] translate-x-[60px]";
 
+// 👉 Manejo del carrusel mobile
+const handleScroll = () => {
+  if (!carouselRef.current) return;
+  const scrollLeft = carouselRef.current.scrollLeft;
+  const cardWidth = carouselRef.current.offsetWidth;
+  const index = Math.round(scrollLeft / cardWidth);
+  setActiveSlide(index);
+};
+
+const goToSlide = (index: number) => {
+  if (!carouselRef.current) return;
+  const cardWidth = carouselRef.current.offsetWidth;
+  carouselRef.current.scrollTo({
+    left: cardWidth * index,
+    behavior: "smooth",
+  });
+};
+
   return (
 <section
   ref={sectionRef}
@@ -159,150 +179,200 @@ style={{ transformOrigin: "left" }}
       </div>
 
       {/* SERVICIOS */}
-
-      <div
-  className={`relative z-10 text-center ${
-    isMobile
-      ? "grid grid-cols-2 gap-x-3 gap-y-10 mt-12 px-4 w-full max-w-[420px]"
-      : `flex justify-center ${CARD_GAP} ${SERVICES_MARGIN_TOP}`
-  }`}
->
-
-        {/* SOCIAL */}
-
-        <div className={`max-w-[260px] ${isMobile ? "col-span-1 mx-auto" : SOCIAL_POSITION}`}>
-
-          <div className={`transition-all duration-700 delay-400 ${
-  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-}`}>
-
-            <img
-              src="/icon-social.png"
-              className={`${ICON_SIZE} mx-auto mb-4`}
-              alt=""
-            />
-
-            <h3 className="text-xl font-black mb-3 leading-tight">
-              Diseño para <br /> Redes Sociales
-            </h3>
-
-            <p className="text-gray-400 text-sm mb-5">
-              Creación de piezas visuales
-              <br />
-              estratégicas para redes sociales
-              <br />
-              que refuerzan la identidad de tu
-              <br />
-              marca y captan la atención en
-              <br />
-              segundos dentro del feed.
-            </p>
-
-            <button
-  type="button"
-  className={BUTTON_STYLE}
-  onClick={() => {
-    setActiveService("Redes Sociales");
-  }}
->
-  INICIAR PROYECTO
-</button>
-
-          </div>
-
+{isMobile ? (
+  /* 📱 MOBILE — CARRUSEL */
+  <div className="relative z-10 w-full mt-12">
+    <div
+      ref={carouselRef}
+      onScroll={handleScroll}
+      className="flex w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+      style={{
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+      }}
+    >
+      {/* SOCIAL */}
+      <div className="min-w-full flex justify-center px-6 snap-center">
+        <div
+          className={`max-w-[280px] text-center transition-all duration-700 delay-400 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <img src="/icon-social.png" className={`${ICON_SIZE} mx-auto mb-4`} alt="" />
+          <h3 className="text-xl font-black mb-3 leading-tight">
+            Diseño para <br /> Redes Sociales
+          </h3>
+          <p className="text-gray-400 text-sm mb-5">
+            Creación de piezas visuales estratégicas para redes sociales
+            que refuerzan la identidad de tu marca y captan la atención
+            en segundos dentro del feed.
+          </p>
+          <button
+            type="button"
+            className={BUTTON_STYLE}
+            onClick={() => setActiveService("Redes Sociales")}
+          >
+            INICIAR PROYECTO
+          </button>
         </div>
-
-        {/* BRANDING */}
-
-        <div className={`max-w-[260px] ${isMobile ? "col-span-1 mx-auto" : BRANDING_POSITION}`}>
-
-          <div className={`transition-all duration-700 delay-500 ${
-  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-}`}>
-
-            <img
-              src="/icon-branding.png"
-              className={`${ICON_SIZE} mx-auto mb-4`}
-              alt=""
-            />
-
-            <h3 className="text-xl font-black mb-3">
-              Branding
-            </h3>
-
-            <p className="text-gray-400 text-sm mb-5">
-              Diseño de identidades visuales
-              <br />
-              completas que construyen marcas
-              <br />
-              memorables: logotipo, sistema
-              <br />
-              gráfico y lineamientos visuales 
-              <br />
-              coherentes.
-            </p>
-
-            <button
-  type="button"
-  className={BUTTON_STYLE}
-  onClick={() => {
-    setActiveService("Branding");
-  }}
->
-  CREAR MI MARCA
-</button>
-
-          </div>
-
-        </div>
-
-        {/* MOTION */}
-
-        <div className={`max-w-[260px] ${isMobile ? "col-span-2 mx-auto" : MOTION_POSITION}`}>
-
-          <div className={`transition-all duration-700 delay-600 ${
-  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-}`}>
-
-            <img
-              src="/icon-motion.png"
-              className={`${ICON_SIZE} mx-auto mb-4`}
-              alt=""
-            />
-
-            <h3 className="text-xl font-black mb-3 leading-tight">
-              Motion <br /> Graphics
-            </h3>
-
-            <p className="text-gray-400 text-sm mb-5">
-              Animación de piezas gráficas,
-              <br />
-              logotipos y contenido visual 
-              <br />
-              para redes sociales o campañas 
-              <br />
-              digitales que aportan dinamismo
-              <br />
-              y mayor impacto.
-            </p>
-
-            <button
-  type="button"
-  className={BUTTON_STYLE}
-  onClick={() => {
-    setActiveService("Motion Graphics");
-  }}
->
-  ANIMAR MI PROYECTO
-</button>
-
-          </div>
-
-        </div>
-
       </div>
 
-      <ServiceModal
+      {/* BRANDING */}
+      <div className="min-w-full flex justify-center px-6 snap-center">
+        <div
+          className={`max-w-[280px] text-center transition-all duration-700 delay-500 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <img src="/icon-branding.png" className={`${ICON_SIZE} mx-auto mb-4`} alt="" />
+          <h3 className="text-xl font-black mb-3">Branding</h3>
+          <p className="text-gray-400 text-sm mb-5">
+            Diseño de identidades visuales completas que construyen
+            marcas memorables: logotipo, sistema gráfico y lineamientos
+            visuales coherentes.
+          </p>
+          <button
+            type="button"
+            className={BUTTON_STYLE}
+            onClick={() => setActiveService("Branding")}
+          >
+            CREAR MI MARCA
+          </button>
+        </div>
+      </div>
+
+      {/* MOTION */}
+      <div className="min-w-full flex justify-center px-6 snap-center">
+        <div
+          className={`max-w-[280px] text-center transition-all duration-700 delay-600 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <img src="/icon-motion.png" className={`${ICON_SIZE} mx-auto mb-4`} alt="" />
+          <h3 className="text-xl font-black mb-3 leading-tight">
+            Motion <br /> Graphics
+          </h3>
+          <p className="text-gray-400 text-sm mb-5">
+            Animación de piezas gráficas, logotipos y contenido visual
+            para redes sociales o campañas digitales que aportan
+            dinamismo y mayor impacto.
+          </p>
+          <button
+            type="button"
+            className={BUTTON_STYLE}
+            onClick={() => setActiveService("Motion Graphics")}
+          >
+            ANIMAR MI PROYECTO
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {/* DOTS INDICATOR */}
+    <div className="flex justify-center gap-2 mt-8">
+      {[0, 1, 2].map((i) => (
+        <button
+          key={i}
+          onClick={() => goToSlide(i)}
+          className={`h-2 rounded-full transition-all duration-300 ${
+            activeSlide === i
+              ? "w-8 bg-blue-500"
+              : "w-2 bg-white/30 hover:bg-white/50"
+          }`}
+          aria-label={`Ir al servicio ${i + 1}`}
+        />
+      ))}
+    </div>
+  </div>
+) : (
+  /* 🖥 DESKTOP — IGUAL QUE ANTES */
+  <div
+    className={`relative z-10 text-center flex justify-center ${CARD_GAP} ${SERVICES_MARGIN_TOP}`}
+  >
+    {/* SOCIAL */}
+    <div className={`max-w-[260px] ${SOCIAL_POSITION}`}>
+      <div
+        className={`transition-all duration-700 delay-400 ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
+      >
+        <img src="/icon-social.png" className={`${ICON_SIZE} mx-auto mb-4`} alt="" />
+        <h3 className="text-xl font-black mb-3 leading-tight">
+          Diseño para <br /> Redes Sociales
+        </h3>
+        <p className="text-gray-400 text-sm mb-5">
+          Creación de piezas visuales
+          <br />estratégicas para redes sociales
+          <br />que refuerzan la identidad de tu
+          <br />marca y captan la atención en
+          <br />segundos dentro del feed.
+        </p>
+        <button
+          type="button"
+          className={BUTTON_STYLE}
+          onClick={() => setActiveService("Redes Sociales")}
+        >
+          INICIAR PROYECTO
+        </button>
+      </div>
+    </div>
+
+    {/* BRANDING */}
+    <div className={`max-w-[260px] ${BRANDING_POSITION}`}>
+      <div
+        className={`transition-all duration-700 delay-500 ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
+      >
+        <img src="/icon-branding.png" className={`${ICON_SIZE} mx-auto mb-4`} alt="" />
+        <h3 className="text-xl font-black mb-3">Branding</h3>
+        <p className="text-gray-400 text-sm mb-5">
+          Diseño de identidades visuales
+          <br />completas que construyen marcas
+          <br />memorables: logotipo, sistema
+          <br />gráfico y lineamientos visuales
+          <br />coherentes.
+        </p>
+        <button
+          type="button"
+          className={BUTTON_STYLE}
+          onClick={() => setActiveService("Branding")}
+        >
+          CREAR MI MARCA
+        </button>
+      </div>
+    </div>
+
+    {/* MOTION */}
+    <div className={`max-w-[260px] ${MOTION_POSITION}`}>
+      <div
+        className={`transition-all duration-700 delay-600 ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
+      >
+        <img src="/icon-motion.png" className={`${ICON_SIZE} mx-auto mb-4`} alt="" />
+        <h3 className="text-xl font-black mb-3 leading-tight">
+          Motion <br /> Graphics
+        </h3>
+        <p className="text-gray-400 text-sm mb-5">
+          Animación de piezas gráficas,
+          <br />logotipos y contenido visual
+          <br />para redes sociales o campañas
+          <br />digitales que aportan dinamismo
+          <br />y mayor impacto.
+        </p>
+        <button
+          type="button"
+          className={BUTTON_STYLE}
+          onClick={() => setActiveService("Motion Graphics")}
+        >
+          ANIMAR MI PROYECTO
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+<ServiceModal
         service={activeService}
         closeModal={() => setActiveService(null)}
       />
