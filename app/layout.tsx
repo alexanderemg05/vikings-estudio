@@ -43,7 +43,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={`${creato.className} ${lotus.variable} overflow-x-hidden`}>
+      <body className={`overflow-x-hidden`}>
         {children}
       </body>
     </html>
