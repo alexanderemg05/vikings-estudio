@@ -79,7 +79,7 @@ export default function SectionBackground() {
     {/* 🔢 SERVICIOS */}
     {isMobile ? (
       /* 📱 MOBILE: 4 en fila, centrados, más arriba */
-      <div className="relative z-[30] w-full px-5 pb-10 -mt-20 flex justify-between items-start gap-3">
+      <div className="relative z-[30] w-full px-5 pb-10 -mt-25 flex justify-between items-start gap-3">
         {services.map(([num, text], i) => (
           <div
             key={i}
