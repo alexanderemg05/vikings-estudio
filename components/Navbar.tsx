@@ -11,7 +11,6 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -22,44 +21,35 @@ export default function Navbar() {
     } else {
       document.body.style.overflow = "auto";
     }
-
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [open]);
 
   return (
-    <nav className="absolute top-0 left-0 w-full z-[50] px-6 py-6 flex justify-between items-center">
+    <nav className="absolute top-0 left-0 w-full z-[50] px-5 py-5 md:px-6 md:py-6 flex justify-between items-center">
       
-      <div className="flex items-center gap-3 text-white font-bold">
-  <img
-    src="/iso.png"
-    alt="Isotipo"
-    className="h-6 w-auto md:h-8"
-  />
-  <span className="text-base md:text-xl">
-    Vikings Estudio
-  </span>
-</div>
+      {/* LOGO */}
+      <div className="flex items-center gap-2 md:gap-3 text-white font-bold">
+        <img
+          src="/iso.png"
+          alt="Isotipo"
+          className="hidden md:block h-6 w-auto md:h-8"
+        />
+        <span className="text-lg md:text-xl border-b-2 border-[#3578FF] md:border-b-0 pb-0.5 md:pb-0">
+          Vikings Estudio
+        </span>
+      </div>
 
-      {/* DESKTOP */}
+      {/* DESKTOP MENU */}
       <div className="hidden md:flex gap-8 text-white font-semibold">
-        <button
-          onClick={() => scrollToSection("services")}
-          className="hover:text-[#6B9CFF] transition"
-        >
+        <button onClick={() => scrollToSection("services")} className="hover:text-[#6B9CFF] transition">
           Servicios
         </button>
-        <button
-          onClick={() => scrollToSection("portfolio")}
-          className="hover:text-[#6B9CFF] transition"
-        >
+        <button onClick={() => scrollToSection("portfolio")} className="hover:text-[#6B9CFF] transition">
           Portafolio
         </button>
-        <button
-          onClick={() => scrollToSection("contact")}
-          className="hover:text-[#6B9CFF] transition"
-        >
+        <button onClick={() => scrollToSection("contact")} className="hover:text-[#6B9CFF] transition">
           Contacto
         </button>
       </div>
@@ -68,7 +58,8 @@ export default function Navbar() {
       <div className="md:hidden">
         <button
           onClick={() => setOpen(!open)}
-          className="text-white text-2xl transition-transform duration-300"
+          className="text-white text-xl bg-white/10 backdrop-blur-md border border-white/20 rounded-lg w-11 h-11 flex items-center justify-center transition-transform duration-300 active:scale-95"
+          aria-label="Toggle menu"
         >
           {open ? "✕" : "☰"}
         </button>
@@ -81,34 +72,24 @@ export default function Navbar() {
         }`}
       >
         <button
-          onClick={() => {
-            scrollToSection("services");
-            setOpen(false);
-          }}
+          onClick={() => { scrollToSection("services"); setOpen(false); }}
           className="text-white font-semibold hover:text-[#6B9CFF] transition"
         >
           Servicios
         </button>
         <button
-          onClick={() => {
-            scrollToSection("portfolio");
-            setOpen(false);
-          }}
+          onClick={() => { scrollToSection("portfolio"); setOpen(false); }}
           className="text-white font-semibold hover:text-[#6B9CFF] transition"
         >
           Portafolio
         </button>
         <button
-          onClick={() => {
-            scrollToSection("contact");
-            setOpen(false);
-          }}
+          onClick={() => { scrollToSection("contact"); setOpen(false); }}
           className="text-white font-semibold hover:text-[#6B9CFF] transition"
         >
           Contacto
         </button>
       </div>
-
     </nav>
   );
 }
