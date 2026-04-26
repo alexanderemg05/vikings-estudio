@@ -90,11 +90,11 @@ export default function SectionBackground() {
               transform: loaded ? "translateY(0px)" : "translateY(20px)",
             }}
           >
-            <div className="text-yellow-400 font-bold italic text-[11px] mb-1">
+            <div className="text-yellow-400 font-bold text-[12px] mb-1">
               {num}
             </div>
             <div
-              style={{ fontSize: "10.5px", lineHeight: "1.25" }}
+              style={{ fontSize: "11.5px", lineHeight: "1.25" }}
               className="font-bold text-white"
             >
               {text}
