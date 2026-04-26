@@ -59,22 +59,24 @@ export default function SectionBackground() {
 
     {/* 🎨 FONDO MOBILE (degradado radial) */}
     {isMobile && (
-      <div
-        className="absolute left-0 w-full pointer-events-none"
-        style={{
-          top: "-100vh",
-          height: "200vh",
-          zIndex: 0,
-          backgroundImage: `
-            radial-gradient(at 20% 20%, #0C131E 0px, transparent 50%),
-            radial-gradient(at 80% 0%, #10213e 0px, transparent 50%),
-            radial-gradient(at 0% 80%, #173c87 0px, transparent 50%),
-            radial-gradient(at 80% 80%, #0C131E 0px, transparent 50%)
-          `,
-          backgroundColor: "#0C131E",
-        }}
-      />
-    )}
+  <div
+    className="absolute left-0 w-full pointer-events-none"
+    style={{
+      top: "-100vh",
+      height: "500vh",
+      zIndex: 0,
+      backgroundImage: `
+        radial-gradient(at 20% 20%, #0C131E 0px, transparent 50%),
+        radial-gradient(at 80% 0%, #10213e 0px, transparent 50%),
+        radial-gradient(at 0% 80%, #173c87 0px, transparent 50%),
+        radial-gradient(at 80% 80%, #0C131E 0px, transparent 50%)
+      `,
+      backgroundColor: "#0C131E",
+      backgroundRepeat: "repeat-y",
+      backgroundSize: "100% 100vh",
+    }}
+  />
+)}
 
     {/* 🔢 SERVICIOS */}
     {isMobile ? (

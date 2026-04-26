@@ -343,11 +343,11 @@ const prev = () => {
 
 <section
   ref={motionRef}
-  className="w-full mt-40 relative z-[50]"
+  className="w-full mt-12 md:mt-40 relative z-[50]"
 >
 
   {/* HEADER */}
-  <div className="text-center max-w-[1000px] mx-auto mb-24">
+  <div className="text-center max-w-[1000px] mx-auto mb-16 md:mb-24 px-6 md:px-0">
 
     <h2
       className={`text-3xl md:text-6xl font-black tracking-wide mb-10 transition-all duration-1000 ease-[cubic-bezier(.22,1,.36,1)] ${
@@ -358,10 +358,10 @@ const prev = () => {
     </h2>
 
     <p
-      className={`text-gray-300 text-[9px] md:text-[14px] leading-relaxed tracking-[0.25em] uppercase transition-all duration-1000 delay-200 ${
-        motionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-      }`}
-    >
+  className={`text-gray-300 text-[11px] md:text-[14px] leading-relaxed tracking-[0.25em] uppercase transition-all duration-1000 delay-200 ${
+    motionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+  }`}
+>
       UNA SELECCIÓN DE PROYECTOS DE{" "}
       <span className="text-[#6B9CFF]">
         EDICIÓN DE VIDEO, ANIMACIÓN Y MOTION GRAPHICS
