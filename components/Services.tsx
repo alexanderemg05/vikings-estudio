@@ -64,28 +64,26 @@ useEffect(() => {
 }, []);
 
   const TITLE_X = 0;
-  const TITLE_Y = -270;
-  const TITLE_SCALE = 1;
-  const TITLE_SIZE = "text-[282px]";
-  const TITLE_OPACITY = "opacity-40";
+const TITLE_Y = isMobile ? -160 : -270;
+const TITLE_SCALE = 1;
+const TITLE_SIZE = isMobile ? "text-[68px]" : "text-[282px]";
+const TITLE_OPACITY = "opacity-40";
 
-  const LINE_WIDTH = "w-[900px]";
+const LINE_WIDTH = isMobile ? "w-[340px]" : "w-[900px]";
 
-  const STATUE_WIDTH = "w-[300px]";
-  const STATUE_MARGIN_TOP = "mt-[50px]";
+const STATUE_WIDTH = isMobile ? "w-[195px]" : "w-[300px]";
+const STATUE_MARGIN_TOP = isMobile ? "mt-[120px]" : "mt-[50px]";
 
-  const SERVICES_MARGIN_TOP = "mt-50";
+const SERVICES_MARGIN_TOP = "mt-50";
+const CARD_GAP = "gap-32";
+const ICON_SIZE = "w-[42px]";
 
-  const CARD_GAP = "gap-32";
+const BUTTON_STYLE =
+  "px-6 py-2 bg-blue-600 rounded-full text-sm font-extrabold tracking-wide hover:scale-105 transition";
 
-  const ICON_SIZE = "w-[42px]";
-
-  const BUTTON_STYLE =
-    "px-6 py-2 bg-blue-600 rounded-full text-sm font-extrabold tracking-wide hover:scale-105 transition";
-
-  const LINE_X = 0;
-  const LINE_Y = -60;
-  const LINE_SCALE = 1.4;
+const LINE_X = 0;
+const LINE_Y = isMobile ? -110 : -60;
+const LINE_SCALE = isMobile ? 1 : 1.4;
 
   const SOCIAL_POSITION = "mt-[-250px] translate-x-[-60px]";
 const BRANDING_POSITION = "mt-[-170px] translate-x-[0px]";
@@ -94,7 +92,17 @@ const MOTION_POSITION = "mt-[-250px] translate-x-[60px]";
   return (
 <section
   ref={sectionRef}
-  id="services" className="relative z-[40] w-full min-h-screen flex flex-col items-center justify-center text-white overflow-hidden">
+  id="services"
+  className="relative z-[40] w-full min-h-screen flex flex-col items-center justify-center text-white overflow-hidden"
+  style={
+    isMobile
+      ? {
+          background:
+            "linear-gradient(to bottom, #000511 0%, #18263F 50%, #1E1E1E 100%)",
+        }
+      : undefined
+  }
+>
       {/* TITULO */}
 
       <div
@@ -155,14 +163,14 @@ style={{ transformOrigin: "left" }}
       <div
   className={`relative z-10 text-center ${
     isMobile
-      ? "flex flex-col items-center gap-16 mt-20"
+      ? "grid grid-cols-2 gap-x-3 gap-y-10 mt-12 px-4 w-full max-w-[420px]"
       : `flex justify-center ${CARD_GAP} ${SERVICES_MARGIN_TOP}`
   }`}
 >
 
         {/* SOCIAL */}
 
-        <div className={`max-w-[260px] ${isMobile ? "" : SOCIAL_POSITION}`}>
+        <div className={`max-w-[260px] ${isMobile ? "col-span-1 mx-auto" : SOCIAL_POSITION}`}>
 
           <div className={`transition-all duration-700 delay-400 ${
   visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -206,7 +214,7 @@ style={{ transformOrigin: "left" }}
 
         {/* BRANDING */}
 
-        <div className={`max-w-[260px] ${isMobile ? "" : BRANDING_POSITION}`}>
+        <div className={`max-w-[260px] ${isMobile ? "col-span-1 mx-auto" : BRANDING_POSITION}`}>
 
           <div className={`transition-all duration-700 delay-500 ${
   visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -250,7 +258,7 @@ style={{ transformOrigin: "left" }}
 
         {/* MOTION */}
 
-        <div className={`max-w-[260px] ${isMobile ? "" : MOTION_POSITION}`}>
+        <div className={`max-w-[260px] ${isMobile ? "col-span-2 mx-auto" : MOTION_POSITION}`}>
 
           <div className={`transition-all duration-700 delay-600 ${
   visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
