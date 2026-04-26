@@ -68,7 +68,7 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       <div
         className={`absolute top-full left-0 w-full bg-[#000000]/95 backdrop-blur-md flex flex-col items-center py-6 gap-6 md:hidden transition-all duration-300 ${
-          open ? "opacity-95 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+          open ? "opacity-90 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
         <button

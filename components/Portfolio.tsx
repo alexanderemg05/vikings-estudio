@@ -146,89 +146,92 @@ const prev = () => {
 >
 
       {/* ================= HEADER ================= */}
-      <div className="max-w-[1400px] mx-auto px-8">
-        <div className="relative">
-          <div className="relative pb-[220px]">
+<div className="max-w-[1400px] mx-auto px-6 md:px-8">
+  <div className="relative">
+    <div className="relative md:pb-[220px] flex flex-col items-center md:block">
 
-            <h2 className={`absolute md:top-0 md:left-26 text-3xl md:text-6xl font-extrabold text-center md:text-left w-full md:w-auto transition-all duration-1000 ${
-            visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
-            }`}>
-              PORTAFOLIO.
-            </h2>
+      {/* TÍTULO */}
+      <h2 className={`md:absolute md:top-0 md:left-26 text-4xl md:text-6xl font-extrabold text-center md:text-left w-full md:w-auto transition-all duration-1000 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"
+      }`}>
+        PORTAFOLIO.
+      </h2>
 
-            <p className={`absolute md:top-19 md:left-26 text-[12px] md:text-[14.5px] text-gray-300 leading-relaxed tracking-[0.25em] text-center md:text-left w-full md:w-auto transition-all duration-1000 delay-150 ${
-            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}>
-              UNA SELECCIÓN DE PROYECTOS DONDE <br />
-              <span className="text-[#6B9CFF]">
-              IDENTIDAD, ESTRATEGIA Y EJECUCIÓN
-              </span>
-            <br />
-              TRABAJAN EN ARMONÍA.
-            </p>
+      {/* SUBTÍTULO */}
+      <p className={`md:absolute md:top-19 md:left-26 mt-4 md:mt-0 text-[11px] md:text-[14.5px] text-gray-300 leading-relaxed tracking-[0.25em] text-center md:text-left w-full md:w-auto transition-all duration-1000 delay-150 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}>
+        UNA SELECCIÓN DE PROYECTOS DONDE <br />
+        <span className="text-[#6B9CFF]">
+          IDENTIDAD, ESTRATEGIA Y EJECUCIÓN
+        </span>
+        <br />
+        TRABAJAN EN ARMONÍA.
+      </p>
 
-            <a
-  href="https://www.behance.net/Alexandermg"
-  target="_blank"
-  rel="noopener noreferrer"
-  className={`absolute md:top-[165px] md:left-26 mt-6 md:mt-0 w-[160px] md:w-[190px] h-[40px] md:h-[45px] flex items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-700 hover:scale-[1.06] transition-all duration-700 delay-300 shadow-lg hover:shadow-blue-500/40 mx-auto md:mx-0 ${
-  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-}`}
->
-  
-  <img
-    src="/behance.png"
-    alt="Behance"
-    className="w-10 h-10 object-contain"
-  />
+      {/* BOTÓN BEHANCE */}
+      <a
+        href="https://www.behance.net/Alexandermg"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`md:absolute md:top-[165px] md:left-26 mt-6 md:mt-0 w-[160px] md:w-[190px] h-[42px] md:h-[45px] flex items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-700 hover:scale-[1.06] transition-all duration-700 delay-300 shadow-lg hover:shadow-blue-500/40 mx-auto md:mx-0 ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+        }`}
+      >
+        <img
+          src="/behance.png"
+          alt="Behance"
+          className="w-8 h-8 md:w-10 md:h-10 object-contain"
+        />
+        <span className="text-base md:text-lg font-semibold tracking-widest">
+          BEHANCE
+        </span>
+      </a>
 
-  <span className="text-lg font-semibold tracking-widest">
-    BEHANCE
-  </span>
+      {/* LÍNEA SEPARADORA (solo desktop) */}
+      <div
+        className={`hidden md:block absolute top-6 left-[593px] w-[1px] h-[180px] bg-white transition-all duration-1000 ${
+          visible ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
+        }`}
+        style={{ transformOrigin: "top" }}
+      />
+    </div>
 
-</a>
+    {/* INFO CARDS — Mobile: 2 lado a lado / Desktop: igual que antes */}
+    <div className="md:absolute md:right-25 md:top-0 flex flex-row gap-3 md:gap-6 items-stretch md:items-start mt-8 md:mt-0 w-full md:w-auto px-0 md:px-0">
 
-            <div
-  className={`hidden md:block absolute top-6 left-[593px] w-[1px] h-[180px] bg-white transition-all duration-1000 ${
-  visible ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
-}`}
-  style={{
-    transformOrigin: "top"
-  }}
-/>
-          </div>
-
-          {/* INFO CARDS */}
-<div className="absolute md:right-25 md:top-0 flex flex-col md:flex-row gap-6 items-center md:items-start mt-[140px] md:mt-0 w-full md:w-auto">
-
-  <div className={`w-[260px] min-h-[180px] p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 transition-all duration-500 delay-500 hover:shadow-lg hover:shadow-blue-500/20 hover:border-blue-500/40 ${
-  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-}`}>
-    <div className="text-yellow-400 text-sm font-bold mb-3">01</div>
-    <h3 className="font-bold mb-3">DISEÑO & <span className="text-[#3578FF]">BRANDING</span></h3>
-    <p className="text-xs text-gray-300 leading-relaxed">
-      Sistemas visuales estratégicos: branding,
-      logotipos, social media, packaging y piezas
-      gráficas diseñadas para construir marcas
-      con identidad y coherencia.
-    </p>
-  </div>
-
-  <div className={`w-[260px] min-h-[215px] p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 transition-all duration-500 delay-500 hover:shadow-lg hover:shadow-blue-500/20 hover:border-blue-500/40 ${
-  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-}`}>
-    <div className="text-yellow-400 text-sm font-bold mb-3">02</div>
-    <h3 className="font-bold mb-3">MOTION & <span className="text-[#3578FF]">ANIMACIÓN</span></h3>
-    <p className="text-xs text-gray-300 leading-relaxed">
-      Animación de logos, motion graphics y edición
-      de video para llevar la identidad visual a un
-      plano dinámico y memorable.
-    </p>
-  </div>
-
-</div>
-        </div>
+      <div className={`flex-1 md:flex-none md:w-[260px] md:min-h-[180px] p-4 md:p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 transition-all duration-500 delay-500 hover:shadow-lg hover:shadow-blue-500/20 hover:border-blue-500/40 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}>
+        <div className="text-yellow-400 text-xs md:text-sm font-bold mb-2 md:mb-3">01</div>
+        <h3 className="font-bold mb-2 md:mb-3 text-sm md:text-base leading-tight">
+          DISEÑO & <span className="text-[#3578FF]">BRANDING</span>
+        </h3>
+        <p className="text-[10px] md:text-xs text-gray-300 leading-relaxed">
+          Sistemas visuales estratégicos: branding,
+          logotipos, social media, packaging y piezas
+          gráficas diseñadas para construir marcas
+          con identidad y coherencia.
+        </p>
       </div>
+
+      <div className={`flex-1 md:flex-none md:w-[260px] md:min-h-[215px] p-4 md:p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 transition-all duration-500 delay-500 hover:shadow-lg hover:shadow-blue-500/20 hover:border-blue-500/40 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}>
+        <div className="text-yellow-400 text-xs md:text-sm font-bold mb-2 md:mb-3">02</div>
+        <h3 className="font-bold mb-2 md:mb-3 text-sm md:text-base leading-tight">
+          MOTION & <span className="text-[#3578FF]">ANIMACIÓN</span>
+        </h3>
+        <p className="text-[10px] md:text-xs text-gray-300 leading-relaxed">
+          Animación de logos, motion graphics y edición
+          de video para llevar la identidad visual a un
+          plano dinámico y memorable.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
 
       {/* ================= CARRUSEL ================= */}
       <div className={`${CAROUSEL_OFFSET} flex flex-col items-center transition-all duration-1000 delay-900 ${
@@ -355,7 +358,7 @@ const prev = () => {
     </h2>
 
     <p
-      className={`text-gray-300 text-[11px] md:text-[14px] leading-relaxed tracking-[0.25em] uppercase transition-all duration-1000 delay-200 ${
+      className={`text-gray-300 text-[9px] md:text-[14px] leading-relaxed tracking-[0.25em] uppercase transition-all duration-1000 delay-200 ${
         motionVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
