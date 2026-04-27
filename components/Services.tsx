@@ -66,14 +66,14 @@ useEffect(() => {
 }, []);
 
   const TITLE_X = 0;
-const TITLE_Y = isMobile ? -160 : -270;
+const TITLE_Y = isMobile ? 40 : -270;
 const TITLE_SCALE = 1;
 const TITLE_SIZE = isMobile ? "text-[68px]" : "text-[282px]";
 const TITLE_OPACITY = "opacity-40";
 
 const LINE_WIDTH = isMobile ? "w-[340px]" : "w-[900px]";
 
-const STATUE_WIDTH = isMobile ? "w-[195px]" : "w-[300px]";
+const STATUE_WIDTH = isMobile ? "w-[175px]" : "w-[300px]";
 const STATUE_MARGIN_TOP = isMobile ? "mt-[120px]" : "mt-[50px]";
 
 const SERVICES_MARGIN_TOP = "mt-50";
@@ -84,7 +84,7 @@ const BUTTON_STYLE =
   "px-6 py-2 bg-blue-600 rounded-full text-sm font-extrabold tracking-wide hover:scale-105 transition";
 
 const LINE_X = 0;
-const LINE_Y = isMobile ? -110 : -60;
+const LINE_Y = isMobile ? 360 : -60;
 const LINE_SCALE = isMobile ? 1 : 1.4;
 
   const SOCIAL_POSITION = "mt-[-250px] translate-x-[-60px]";

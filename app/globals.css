@@ -255,3 +255,11 @@ body {
 .delay-1 { animation-delay: 0.4s; }
 .delay-2 { animation-delay: 0.7s; }
 .delay-3 { animation-delay: 1s; }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

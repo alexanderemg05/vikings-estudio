@@ -62,18 +62,18 @@ export default function SectionBackground() {
   <div
     className="absolute left-0 w-full pointer-events-none"
     style={{
-      top: "-100vh",
-      height: "500vh",
+      top: "0",
+      height: "350vh",
       zIndex: 0,
       backgroundImage: `
-        radial-gradient(at 20% 20%, #0C131E 0px, transparent 50%),
+        radial-gradient(at 20% 10%, #0C131E 0px, transparent 50%),
         radial-gradient(at 80% 0%, #10213e 0px, transparent 50%),
-        radial-gradient(at 0% 80%, #173c87 0px, transparent 50%),
-        radial-gradient(at 80% 80%, #0C131E 0px, transparent 50%)
+        radial-gradient(at 0% 40%, #173c87 0px, transparent 50%),
+        radial-gradient(at 80% 60%, #0C131E 0px, transparent 50%),
+        radial-gradient(at 20% 90%, #173c87 0px, transparent 50%),
+        radial-gradient(at 80% 95%, #0C131E 0px, transparent 50%)
       `,
       backgroundColor: "#0C131E",
-      backgroundRepeat: "repeat-y",
-      backgroundSize: "100% 100vh",
     }}
   />
 )}
