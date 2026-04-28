@@ -73,8 +73,8 @@ const TITLE_OPACITY = "opacity-40";
 
 const LINE_WIDTH = isMobile ? "w-[340px]" : "w-[900px]";
 
-const STATUE_WIDTH = isMobile ? "w-[140px]" : "w-[300px]";
-const STATUE_MARGIN_TOP = isMobile ? "mt-[120px]" : "mt-[50px]";
+const STATUE_WIDTH = isMobile ? "w-[150px]" : "w-[300px]";
+const STATUE_MARGIN_TOP = isMobile ? "mt-[60px]" : "mt-[50px]";
 
 const SERVICES_MARGIN_TOP = "mt-50";
 const CARD_GAP = "gap-32";
