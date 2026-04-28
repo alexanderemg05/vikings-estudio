@@ -1,10 +1,18 @@
-"use client"; 
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function About() {
   const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // =========================
   // 🎛️ CONTROLES
@@ -12,30 +20,30 @@ export default function About() {
 
   // ISO
   const ISO_SIZE = "w-[110px]";
-  const ISO_X = typeof window !== "undefined" && window.innerWidth < 768 ? 0 : -250;
+  const ISO_X = isMobile ? 0 : -250;
   const ISO_Y = 90;
 
   // TITULO
   const TITLE_SIZE = "text-3xl md:text-[67px]";
-  const TITLE_X = typeof window !== "undefined" && window.innerWidth < 768 ? 0 : -240;
+  const TITLE_X = isMobile ? 0 : -240;
   const TITLE_Y = 90;
 
   // TEXTO
   const TEXT_SIZE = "text-[14px] md:text-[16px]";
   const TEXT_WIDTH = "max-w-[650px]";
-  const TEXT_X = typeof window !== "undefined" && window.innerWidth < 768 ? 0 : -250;
+  const TEXT_X = isMobile ? 0 : -250;
   const TEXT_Y = 90;
 
-  // BOTON CONTROLES
-  const BTN_TEXT_SIZE = "text-[17px]";
-  const BTN_ARROW_SIZE = "text-[21px]";
+  // BOTON CONTROLES (responsive)
+  const BTN_TEXT_SIZE = isMobile ? "text-[13px]" : "text-[17px]";
+  const BTN_ARROW_SIZE = isMobile ? "text-[16px]" : "text-[21px]";
   const BTN_BORDER = "border-[2px]";
-  const BTN_PADDING_X = "px-6";
-  const BTN_PADDING_Y = "py-2";
+  const BTN_PADDING_X = isMobile ? "px-4" : "px-6";
+  const BTN_PADDING_Y = isMobile ? "py-1.5" : "py-2";
   const BTN_RADIUS = "rounded-full";
 
   // BOTON POSICION
-  const BUTTON_X = typeof window !== "undefined" && window.innerWidth < 768 ? 0 : -250;
+  const BUTTON_X = isMobile ? 0 : -250;
   const BUTTON_Y = 90;
   const BUTTON_SCALE = 1;
 
@@ -44,20 +52,22 @@ export default function About() {
   const CONTENT_Y = 0;
 
   useEffect(() => {
-  if (open) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
-  return () => {
-    document.body.style.overflow = "auto";
-  };
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [open]);
 
   return (
-    <section id="about" className="relative z-30 w-full min-h-screen flex items-center justify-center text-white">
-
+    <section
+      id="about"
+      className="relative z-30 w-full flex items-center justify-center text-white min-h-[60vh] py-12 md:min-h-screen md:py-0"
+    >
       {/* CONTENEDOR */}
       <motion.div
         className="flex flex-col items-start md:items-start items-center px-6 md:px-0 text-center md:text-left"
@@ -66,10 +76,8 @@ export default function About() {
         viewport={{ once: true }}
         style={{ x: CONTENT_X, y: CONTENT_Y }}
       >
-
         {/* ISO + TITULO */}
         <div className="flex items-center gap-4 mb-8">
-
           {/* ISO */}
           <motion.img
             src="/iso.png"
@@ -90,7 +98,6 @@ export default function About() {
           >
             Vikings <span className="text-[#4B87FF]">Estudio</span>
           </motion.h2>
-
         </div>
 
         {/* TEXTO */}
@@ -101,14 +108,12 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
         >
-
           <p>
             <span className="font-bold not-italic text-white">
               Vikings Estudio nace de una idea sencilla:
             </span>{" "}
-            crear con la misma fuerza, determinación y
-            
-            pasión con la que los vikingos exploraban nuevos horizontes.
+            crear con la misma fuerza, determinación y pasión con la que los
+            vikingos exploraban nuevos horizontes.
           </p>
 
           <p>
@@ -116,21 +121,15 @@ export default function About() {
             <span className="text-[#4B87FF] not-italic">
               identidades visuales con propósito:
             </span>{" "}
-            minimalistas,
-            
-            memorables y diseñadas para ayudar a las marcas a diferenciarse y alcanzar su mejor
-            
-            versión.
+            minimalistas, memorables y diseñadas para ayudar a las marcas a
+            diferenciarse y alcanzar su mejor versión.
           </p>
 
           <p>
-            Cada proyecto nace de un proceso creativo enfocado en comprender la esencia de la
-            
-            marca, combinando estrategia, creatividad y diseño premium para construir identidades
-            
-            sólidas y duraderas.
+            Cada proyecto nace de un proceso creativo enfocado en comprender
+            la esencia de la marca, combinando estrategia, creatividad y
+            diseño premium para construir identidades sólidas y duraderas.
           </p>
-
         </motion.div>
 
         {/* BOTON */}
@@ -155,9 +154,7 @@ export default function About() {
               group-hover:bg-[#3578FF]
               group-hover:border-[#3578FF]
             `}
-
           >
-
             <span
               className={`
                 ${BTN_TEXT_SIZE}
@@ -179,10 +176,8 @@ export default function About() {
             >
               →
             </span>
-
           </div>
         </motion.button>
-
       </motion.div>
 
       {/* MODAL TARJETA */}
@@ -196,7 +191,7 @@ export default function About() {
             onClick={() => setOpen(false)}
           >
             <motion.img
-              src="/tarjeta-1.png"
+              src={isMobile ? "/tarjeta-1-movil.png" : "/tarjeta-1.png"}
               className="max-w-[90%] md:max-w-[800px]"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -206,7 +201,6 @@ export default function About() {
           </motion.div>
         )}
       </AnimatePresence>
-
     </section>
   );
 }
