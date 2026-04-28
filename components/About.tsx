@@ -19,20 +19,20 @@ export default function About() {
   // =========================
 
   // ISO
-  const ISO_SIZE = "w-[110px]";
-  const ISO_X = isMobile ? 0 : -250;
-  const ISO_Y = 90;
+const ISO_SIZE = isMobile ? "w-[55px]" : "w-[110px]";
+const ISO_X = isMobile ? 0 : -250;
+const ISO_Y = isMobile ? 0 : 90;
 
-  // TITULO
-  const TITLE_SIZE = "text-3xl md:text-[67px]";
-  const TITLE_X = isMobile ? 0 : -240;
-  const TITLE_Y = 90;
+// TITULO
+const TITLE_SIZE = "text-[28px] md:text-[67px]";
+const TITLE_X = isMobile ? 0 : -240;
+const TITLE_Y = isMobile ? 0 : 90;
 
   // TEXTO
   const TEXT_SIZE = "text-[14px] md:text-[16px]";
   const TEXT_WIDTH = "max-w-[650px]";
   const TEXT_X = isMobile ? 0 : -250;
-  const TEXT_Y = 90;
+const TEXT_Y = isMobile ? 0 : 90;
 
   // BOTON CONTROLES (responsive)
   const BTN_TEXT_SIZE = isMobile ? "text-[13px]" : "text-[17px]";
@@ -44,7 +44,7 @@ export default function About() {
 
   // BOTON POSICION
   const BUTTON_X = isMobile ? 0 : -250;
-  const BUTTON_Y = 90;
+const BUTTON_Y = isMobile ? 0 : 90;
   const BUTTON_SCALE = 1;
 
   // CONTENEDOR GENERAL
