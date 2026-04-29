@@ -133,51 +133,50 @@ const BUTTON_Y = isMobile ? 0 : 90;
         </motion.div>
 
         {/* BOTON */}
-        <motion.button
-          onClick={() => setOpen(true)}
-          className="group relative mt-10"
-          initial={{ opacity: 0, x: BUTTON_X, y: BUTTON_Y + 40, scale: BUTTON_SCALE }}
-          whileInView={{ opacity: 1, x: BUTTON_X, y: BUTTON_Y, scale: BUTTON_SCALE }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <div
-            className={`
-              ${BTN_PADDING_X} ${BTN_PADDING_Y}
-              ${BTN_RADIUS}
-              ${BTN_BORDER}
-              border-white
-              flex items-center gap-2
-              transition-all duration-300
-              group-hover:bg-[#3578FF]
-              group-hover:border-[#3578FF]
-            `}
-          >
-            <span
-              className={`
-                ${BTN_TEXT_SIZE}
-                font-semibold tracking-wide
-                text-white transition-colors duration-300
-              `}
-            >
-              SOBRE EL{" "}
-              <span className="text-[#4B87FF] group-hover:text-white">
-                FUNDADOR
-              </span>
-            </span>
+<motion.button
+  onClick={() => setOpen(true)}
+  className="group relative mt-10"
+  initial={{ opacity: 0, x: BUTTON_X, y: BUTTON_Y + 40, scale: BUTTON_SCALE }}
+  animate={{ opacity: 1, x: BUTTON_X, y: BUTTON_Y, scale: BUTTON_SCALE }}
+  transition={{ duration: 0.6, delay: 0.4 }}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+>
+  <div
+    className={`
+      ${BTN_PADDING_X} ${BTN_PADDING_Y}
+      ${BTN_RADIUS}
+      ${BTN_BORDER}
+      border-white
+      flex items-center gap-2
+      transition-all duration-300
+      group-hover:bg-[#3578FF]
+      group-hover:border-[#3578FF]
+    `}
+  >
+    <span
+      className={`
+        ${BTN_TEXT_SIZE}
+        font-semibold tracking-wide
+        text-white transition-colors duration-300
+      `}
+    >
+      SOBRE EL{" "}
+      <span className="text-[#4B87FF] group-hover:text-white">
+        FUNDADOR
+      </span>
+    </span>
 
-            <span
-              className={`
-                ${BTN_ARROW_SIZE}
-                text-white transition-colors duration-300
-              `}
-            >
-              →
-            </span>
-          </div>
-        </motion.button>
+    <span
+      className={`
+        ${BTN_ARROW_SIZE}
+        text-white transition-colors duration-300
+      `}
+    >
+      →
+    </span>
+  </div>
+</motion.button>
       </motion.div>
 
       {/* MODAL TARJETA */}
