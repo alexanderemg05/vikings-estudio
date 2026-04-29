@@ -57,23 +57,19 @@ export default function SectionBackground() {
       </div>
     )}
 
-    {/* 🎨 FONDO MOBILE (imagen PNG) */}
-    {isMobile && (
-      <div
-        className="absolute left-0 w-full pointer-events-none"
-        style={{
-          top: "0",
-          height: "350vh",
-          zIndex: 0,
-        }}
-      >
-        <img
-          src="/fondo-mobile.png"
-          alt="Fondo mobile"
-          className="w-full h-full object-cover"
-        />
-      </div>
-    )}
+    {/* 🎨 FONDO MOBILE (imagen PNG fija detrás de TODA la página) */}
+{isMobile && (
+  <div
+    className="fixed inset-0 pointer-events-none"
+    style={{ zIndex: -1 }}
+  >
+    <img
+      src="/fondo-mobile.png"
+      alt="Fondo mobile"
+      className="w-full h-full object-cover"
+    />
+  </div>
+)}
 
     {/* 🔢 SERVICIOS */}
     {isMobile ? (

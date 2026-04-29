@@ -116,14 +116,6 @@ const goToSlide = (index: number) => {
   className={`relative z-[40] w-full min-h-screen flex flex-col items-center text-white overflow-hidden ${
     isMobile ? "justify-start pt-8" : "justify-center"
   }`}
-  style={
-    isMobile
-      ? {
-          background:
-            "linear-gradient(to bottom, #000511 0%, #18263F 50%, #1E1E1E 100%)",
-        }
-      : undefined
-  }
 >
 
   {isMobile ? (
