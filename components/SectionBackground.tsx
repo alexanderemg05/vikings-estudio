@@ -61,7 +61,7 @@ export default function SectionBackground() {
 {isMobile && (
   <div
     className="fixed inset-0 pointer-events-none"
-    style={{ zIndex: -1 }}
+    style={{ zIndex: 0 }}
   >
     <img
       src="/fondo-mobile.png"
