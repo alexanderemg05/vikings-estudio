@@ -52,16 +52,19 @@ const BUTTON_Y = isMobile ? 0 : 90;
   const CONTENT_Y = 0;
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+  if (open) {
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+    document.documentElement.style.overflow = "auto";
+  }
 
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [open]);
+  return () => {
+    document.body.style.overflow = "auto";
+    document.documentElement.style.overflow = "auto";
+  };
+}, [open]);
 
   return (
     <section
@@ -70,14 +73,13 @@ const BUTTON_Y = isMobile ? 0 : 90;
     >
       {/* CONTENEDOR */}
       <motion.div
-        className="flex flex-col items-start md:items-start items-center px-6 md:px-0 text-center md:text-left"
+          className="flex flex-col items-center md:items-start px-6 md:px-0 text-center md:text-left w-full"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        style={{ x: CONTENT_X, y: CONTENT_Y }}
       >
         {/* ISO + TITULO */}
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-4 mb-8 justify-center md:justify-start">
           {/* ISO */}
           {/* ISO */}
 <motion.img
@@ -183,7 +185,7 @@ const BUTTON_Y = isMobile ? 0 : 90;
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-[99999]"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[99999]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
