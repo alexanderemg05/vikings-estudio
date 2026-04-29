@@ -79,14 +79,14 @@ const BUTTON_Y = isMobile ? 0 : 90;
         {/* ISO + TITULO */}
         <div className="flex items-center gap-4 mb-8">
           {/* ISO */}
-          <motion.img
-            src="/iso.png"
-            className={ISO_SIZE}
-            initial={{ opacity: 0, x: ISO_X, y: ISO_Y + 40 }}
-            whileInView={{ opacity: 1, x: ISO_X, y: ISO_Y }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          />
+          {/* ISO */}
+<motion.img
+  src="/iso.png"
+  className={ISO_SIZE}
+  initial={{ opacity: 0, x: ISO_X, y: ISO_Y + 40 }}
+  animate={{ opacity: 1, x: ISO_X, y: ISO_Y }}
+  transition={{ duration: 0.6, delay: 0.1 }}
+/>
 
           {/* TITULO */}
           <motion.h2
