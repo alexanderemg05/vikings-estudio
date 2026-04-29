@@ -53,17 +53,25 @@ const BUTTON_Y = isMobile ? 0 : 90;
 
   useEffect(() => {
   if (open) {
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
+    // Guarda la posición actual del scroll
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
   } else {
-    document.body.style.overflow = "auto";
-    document.documentElement.style.overflow = "auto";
+    // Restaura el scroll a la posición anterior
+    const scrollY = document.body.style.top;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    if (scrollY) {
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
   }
-
-  return () => {
-    document.body.style.overflow = "auto";
-    document.documentElement.style.overflow = "auto";
-  };
 }, [open]);
 
   return (
