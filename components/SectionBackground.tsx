@@ -42,7 +42,7 @@ export default function SectionBackground() {
 
   return (
   <section className="absolute top-0 left-0 w-full pointer-events-none">
-    
+
     {/* 🎨 FONDO DESKTOP (imagen) */}
     {!isMobile && (
       <div
@@ -57,26 +57,23 @@ export default function SectionBackground() {
       </div>
     )}
 
-    {/* 🎨 FONDO MOBILE (degradado radial) */}
+    {/* 🎨 FONDO MOBILE (imagen PNG) */}
     {isMobile && (
-  <div
-    className="absolute left-0 w-full pointer-events-none"
-    style={{
-      top: "0",
-      height: "350vh",
-      zIndex: 0,
-      backgroundImage: `
-        radial-gradient(at 20% 10%, #0C131E 0px, transparent 50%),
-        radial-gradient(at 80% 0%, #10213e 0px, transparent 50%),
-        radial-gradient(at 0% 40%, #173c87 0px, transparent 50%),
-        radial-gradient(at 80% 60%, #0C131E 0px, transparent 50%),
-        radial-gradient(at 20% 90%, #173c87 0px, transparent 50%),
-        radial-gradient(at 80% 95%, #0C131E 0px, transparent 50%)
-      `,
-      backgroundColor: "#0C131E",
-    }}
-  />
-)}
+      <div
+        className="absolute left-0 w-full pointer-events-none"
+        style={{
+          top: "0",
+          height: "350vh",
+          zIndex: 0,
+        }}
+      >
+        <img
+          src="/fondo-mobile.png"
+          alt="Fondo mobile"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    )}
 
     {/* 🔢 SERVICIOS */}
     {isMobile ? (
@@ -133,4 +130,5 @@ export default function SectionBackground() {
       </div>
     )}
   </section>
-  )}
+  );
+}
