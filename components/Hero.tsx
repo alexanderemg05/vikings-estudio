@@ -79,9 +79,6 @@ export default function Hero() {
       <section className="relative min-h-screen w-full overflow-hidden">
         <Navbar />
 
-        <div className="absolute inset-0 z-0" style={{ backgroundColor: `rgba(0,0,0,${BACKGROUND_DARKNESS})` }} />
-<div className="absolute inset-0 pointer-events-none mix-blend-overlay z-0" style={{ backgroundImage: "url('/noise.png')", opacity: NOISE_OPACITY }} />
-
         {/* Contenido en flujo natural */}
         <div className="relative z-10 flex flex-col items-center justify-start min-h-screen pt-24 pb-10 px-6">
           
