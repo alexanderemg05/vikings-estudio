@@ -267,8 +267,6 @@ body {
 /* 📱 Fondo mobile global */
 @media (max-width: 767px) {
   body {
-    background: url('/fondo-mobile.png') no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
+    background: red;   /* 🔴 TEMPORAL para diagnosticar */
   }
 }
