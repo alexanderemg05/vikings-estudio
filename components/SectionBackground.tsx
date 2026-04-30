@@ -57,19 +57,6 @@ export default function SectionBackground() {
       </div>
     )}
 
-    {/* 🎨 FONDO MOBILE (imagen PNG fija detrás de TODA la página) */}
-{isMobile && (
-  <div
-    className="fixed inset-0 pointer-events-none"
-    style={{ zIndex: 0 }}
-  >
-    <img
-      src="/fondo-mobile.png"
-      alt="Fondo mobile"
-      className="w-full h-full object-cover"
-    />
-  </div>
-)}
 
     {/* 🔢 SERVICIOS */}
     {isMobile ? (
