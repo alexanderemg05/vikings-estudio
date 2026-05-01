@@ -20,18 +20,18 @@ export default function About() {
 
   // ISO
 const ISO_SIZE = isMobile ? "w-[55px]" : "w-[110px]";
-const ISO_X = isMobile ? 0 : -250;
+const ISO_X = isMobile ? 0 : 0;
 const ISO_Y = isMobile ? 0 : 90;
 
 // TITULO
 const TITLE_SIZE = "text-[28px] md:text-[67px]";
-const TITLE_X = isMobile ? 0 : -240;
+const TITLE_X = isMobile ? 0 : 0;
 const TITLE_Y = isMobile ? 0 : 90;
 
   // TEXTO
   const TEXT_SIZE = "text-[14px] md:text-[16px]";
   const TEXT_WIDTH = "max-w-[650px]";
-  const TEXT_X = isMobile ? 0 : -250;
+  const TEXT_X = isMobile ? 0 : 0;
 const TEXT_Y = isMobile ? 0 : 90;
 
   // BOTON CONTROLES (responsive)
@@ -43,7 +43,7 @@ const TEXT_Y = isMobile ? 0 : 90;
   const BTN_RADIUS = "rounded-full";
 
   // BOTON POSICION
-  const BUTTON_X = isMobile ? 0 : -250;
+  const BUTTON_X = isMobile ? 0 : 0;
 const BUTTON_Y = isMobile ? 0 : 90;
   const BUTTON_SCALE = 1;
 
@@ -81,7 +81,7 @@ const BUTTON_Y = isMobile ? 0 : 90;
     >
       {/* CONTENEDOR */}
       <motion.div
-          className="flex flex-col items-center md:items-start px-6 md:px-0 text-center md:text-left w-full"
+            className="flex flex-col items-center md:items-start px-6 md:px-32 text-center md:text-left w-full max-w-[1400px] mx-auto"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
