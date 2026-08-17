@@ -2,275 +2,238 @@
 
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
-import { scrollToSection } from "@/utils/scrollToSection";
+import { siteConfig } from "./site.config";
+
+function hexToRgba(hex: string, alpha: number) {
+  const n = hex.replace("#", "");
+  const r = parseInt(n.substring(0, 2), 16);
+  const g = parseInt(n.substring(2, 4), 16);
+  const b = parseInt(n.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
 
 export default function Hero() {
+  const { hero, colors } = siteConfig;
+  const [loaded, setLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
+    setLoaded(true);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  /* 🌌 HERO */
-  const PARALLAX_INTENSITY = 4;
-  const BACKGROUND_BLUR = 1;
-  const BACKGROUND_DARKNESS = 0.35;
-  const NOISE_OPACITY = 0.08;
+  const videoSrc =
+    isMobile && hero.background.mobileVideo
+      ? hero.background.mobileVideo
+      : hero.background.desktopVideo;
 
-  /* 🏛 ESTATUA */
-  const STATUE_SIZE = isMobile ? 360 : 645;
-  const STATUE_Y = isMobile ? 0 : -20;
-  const STATUE_X = 0;
-
-  /* 🔥 ISOTIPO (solo desktop) */
-  const ISOTIPO_SIZE = 90;
-  const ISO_X = 475;
-  const ISO_Y = -20;
-
-  /* ✍️ TÍTULO */
-  const TITLE_LINE_1 = "Construimos";
-  const TITLE_LINE_2_PART1 = "MARCAS";
-  const TITLE_LINE_2_PART2 = " CON";
-  const TITLE_LINE_3 = "CARÁCTER";
-  const TITLE_SMALL_SIZE = isMobile ? 26 : 41;
-  const TITLE_MAIN_SIZE = isMobile ? 44 : 57;
-  const TITLE_X = -450;
-  const TITLE_Y = -150;
-
-  /* ✍️ SUBTÍTULO (solo desktop) */
-  const SUBTITLE_LINE_1 = "DONDE LA ESTRATEGIA";
-  const SUBTITLE_LINE_2 = "SE CONVIERTE EN UN SIMBOLO.";
-  const SUBTITLE_SIZE = 16;
-  const SUBTITLE_X = 475;
-  const SUBTITLE_Y = 70;
-
-  /* 🔘 BOTONES */
-  const BUTTON_WIDTH = isMobile ? 150 : 170;
-  const BUTTON_HEIGHT = isMobile ? 44 : 40;
-  const BUTTONS_X = 475;
-  const BUTTONS_Y = 140;
-
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isMobile) return;
-    let x = (e.clientX / window.innerWidth - 0.5) * PARALLAX_INTENSITY;
-    let y = (e.clientY / window.innerHeight - 0.5) * PARALLAX_INTENSITY;
-    x = Math.max(Math.min(x, 10), -10);
-    y = Math.max(Math.min(y, 10), -10);
-    setPosition({ x, y });
-  };
-
-  /* ============================= */
-  /* 📱 MOBILE LAYOUT */
-  /* ============================= */
-  if (isMobile) {
-    return (
-      <section className="relative min-h-screen w-full overflow-hidden">
-        <Navbar />
-
-        {/* Contenido en flujo natural */}
-        <div className="relative z-10 flex flex-col items-center justify-start min-h-screen pt-24 pb-10 px-6">
-          
-          {/* 🏛 ESTATUA */}
-          <img
-            src="/statue.png"
-            alt="Estatua"
-            style={{ height: `${STATUE_SIZE}px` }}
-            className={`relative z-10 transition-all duration-[1400ms] ease-out ${
-              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
-            }`}
-          />
-
-          {/* ✍️ TÍTULO */}
-          <div
-            className={`relative z-30 text-center mt-2 transition-all duration-[1200ms] delay-200 ${
-              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-          >
-            <h1 className="leading-tight text-center text-white">
-              <div style={{ fontSize: `${TITLE_SMALL_SIZE}px` }} className="font-extrabold">
-                {TITLE_LINE_1}
-              </div>
-              <div style={{ fontSize: `${TITLE_MAIN_SIZE}px` }} className="font-extrabold leading-[1.05]">
-                <span className="text-[#3578FF]">{TITLE_LINE_2_PART1}</span>
-                {TITLE_LINE_2_PART2}
-              </div>
-              <div style={{ fontSize: `${TITLE_MAIN_SIZE}px` }} className="font-extrabold leading-[1.05]">
-                {TITLE_LINE_3}
-              </div>
-            </h1>
-          </div>
-
-          {/* 🔘 BOTONES */}
-          <div
-            className={`relative z-30 flex flex-row justify-center items-center gap-4 mt-8 transition-all duration-[1200ms] delay-500 ${
-              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-          >
-            <button
-              onClick={() => scrollToSection("about")}
-              style={{
-                width: `${BUTTON_WIDTH}px`,
-                height: `${BUTTON_HEIGHT}px`,
-                borderRadius: "9999px",
-                backgroundColor: "#3578FF",
-              }}
-              className="font-bold text-sm text-white transition active:scale-95"
-            >
-              Conóceme
-            </button>
-
-            <button
-              onClick={() => scrollToSection("contact")}
-              style={{
-                width: `${BUTTON_WIDTH}px`,
-                height: `${BUTTON_HEIGHT}px`,
-                borderRadius: "9999px",
-                border: "2px solid white",
-              }}
-              className="font-bold text-sm text-white transition active:scale-95"
-            >
-              Trabajemos Juntos
-            </button>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  /* ============================= */
-  /* 🖥 DESKTOP LAYOUT (intacto) */
-  /* ============================= */
   return (
     <section
-      onMouseMove={handleMouseMove}
-      className="relative min-h-screen w-full overflow-hidden"
+      className="relative w-full overflow-hidden"
+      style={{
+        height: "100svh",
+        minHeight: "100vh",
+        backgroundColor: colors.black,
+        fontFamily: "var(--font-creato), sans-serif",
+      }}
     >
+      {/* ===== 1. BACKGROUND (imagen ahora · vídeo en el futuro) ===== */}
+      <div
+        className="absolute inset-0 z-0 transition-transform duration-[2400ms] ease-out"
+        style={{ transform: loaded ? "scale(1)" : "scale(1.07)" }}
+      >
+        {hero.background.type === "video" ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-full w-full object-cover"
+            style={{ objectPosition: hero.background.position }}
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={hero.background.image}
+            alt=""
+            className="h-full w-full object-cover"
+            style={{ objectPosition: hero.background.position }}
+          />
+        )}
+      </div>
+
+      {/* ===== 2. OVERLAY (color + opacidad configurables) ===== */}
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{
+          backgroundColor: hexToRgba(colors.overlayColor, colors.overlayOpacity),
+        }}
+      />
+      {/* Viñeta cinematográfica suave */}
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{
+          background: `linear-gradient(to bottom, ${hexToRgba(
+            colors.black,
+            0.35
+          )} 0%, transparent 30%, transparent 62%, ${hexToRgba(
+            colors.black,
+            0.55
+          )} 100%)`,
+        }}
+      />
+
+      {/* ===== 3. NAVBAR ===== */}
       <Navbar />
 
-      <div
-        className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] z-0"
+      {/* ===== 4. HERO CONTENT ===== */}
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+        {/* Isotipo — firma de marca sobre el título
+            (teñido a #E8E3D5 con máscara CSS, iso.png no se modifica) */}
+        <span
+          role="img"
+          aria-label="Isotipo Vikings Studio"
+          className={`block transition-all duration-[1200ms] ease-out ${
+            loaded ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+          }`}
+          style={{
+            width: hero.isoSize,
+            height: hero.isoSize,
+            marginBottom: hero.isoMarginBottom,
+            backgroundColor: colors.white,
+            WebkitMaskImage: `url(${hero.isoSrc})`,
+            maskImage: `url(${hero.isoSrc})`,
+            WebkitMaskSize: "contain",
+            maskSize: "contain",
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
+            WebkitMaskPosition: "center",
+            maskPosition: "center",
+            transitionDelay: "0ms",
+          }}
+        />
+
+        <h1
+          className={`uppercase transition-all duration-[1200ms] ease-out ${
+            loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          }`}
+          style={{
+            fontSize: hero.titleSize,
+            fontWeight: hero.titleWeight,
+            letterSpacing: hero.titleLetterSpacing,
+            lineHeight: hero.titleLineHeight,
+            transitionDelay: "150ms",
+          }}
+        >
+          <span className="block" style={{ color: colors.blue }}>
+            {hero.titleLine1}
+          </span>
+          <span className="block" style={{ color: colors.white }}>
+            {hero.titleLine2}
+          </span>
+        </h1>
+
+        <p
+          className={`uppercase transition-all duration-[1200ms] ease-out ${
+            loaded ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+          }`}
+          style={{
+            marginTop: hero.subtitleMarginTop,
+            fontSize: hero.subtitleSize,
+            fontWeight: hero.subtitleWeight,
+            letterSpacing: hero.subtitleLetterSpacing,
+            color: colors.white,
+            transitionDelay: "350ms",
+          }}
+        >
+          {hero.subtitle}
+        </p>
+
+        <p
+          className={`uppercase transition-all duration-[1200ms] ease-out ${
+            loaded ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+          }`}
+          style={{
+            marginTop: hero.taglineMarginTop,
+            fontSize: hero.taglineSize,
+            fontWeight: hero.taglineWeight,
+            letterSpacing: hero.taglineLetterSpacing,
+            color: hexToRgba(colors.white, 0.75),
+            transitionDelay: "500ms",
+          }}
+        >
+          {hero.tagline}
+        </p>
+      </div>
+
+      {/* ===== 5. SCROLL INDICATOR ===== */}
+      <a
+        href="#about"
+        aria-label="Bajar a la siguiente sección"
+        className={`absolute left-1/2 z-10 flex -translate-x-1/2 flex-col items-center transition-opacity duration-1000 ${
+          loaded ? "opacity-70 hover:opacity-100" : "opacity-0"
+        }`}
         style={{
-          transform: `translate(${position.x}px, ${position.y}px) scale(1.05)`,
-          filter: `blur(${BACKGROUND_BLUR}px)`,
+          bottom: hero.scrollIndicator.bottom,
+          color: colors.white,
+          transitionDelay: loaded ? "950ms" : "0ms",
         }}
       >
-        <img src="/fondo.jpg" alt="Paisaje" className="w-full h-full object-cover" />
-      </div>
-
-      <div
-        className="absolute inset-0 z-0"
-        style={{ backgroundColor: `rgba(0,0,0,${BACKGROUND_DARKNESS})` }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none mix-blend-overlay z-0"
-        style={{ backgroundImage: "url('/noise.png')", opacity: NOISE_OPACITY }}
-      />
-
-      <div className="relative min-h-screen flex flex-col items-center justify-center">
-        <img
-          src="/statue.png"
-          alt="Estatua"
+        <span
+          className="uppercase"
           style={{
-            height: `${STATUE_SIZE}px`,
-            transform: `translate(${STATUE_X}px, ${STATUE_Y}px)`,
+            fontSize: hero.scrollIndicator.size,
+            letterSpacing: hero.scrollIndicator.letterSpacing,
+            fontWeight: 500,
           }}
-          className={`z-10 absolute transition-all duration-[1400ms] ease-out ${
-            loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
-          }`}
-        />
-
-        <div
-          style={{ transform: `translate(${TITLE_X}px, ${TITLE_Y}px)` }}
-          className={`z-30 absolute transition-all duration-[1200ms] delay-200 ${
-            loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
-          }`}
         >
-          <h1 className="leading-tight text-left">
-            <div style={{ fontSize: `${TITLE_SMALL_SIZE}px` }} className="font-extrabold">
-              {TITLE_LINE_1}
-            </div>
-            <div style={{ fontSize: `${TITLE_MAIN_SIZE}px` }} className="font-extrabold">
-              <span className="text-[#3578FF]">{TITLE_LINE_2_PART1}</span>
-              {TITLE_LINE_2_PART2}
-            </div>
-            <div style={{ fontSize: `${TITLE_MAIN_SIZE}px` }} className="font-extrabold">
-              {TITLE_LINE_3}
-            </div>
-          </h1>
-        </div>
-
-        <div
-          style={{ transform: `translate(${SUBTITLE_X}px, ${SUBTITLE_Y}px)` }}
-          className={`absolute z-30 text-center transition-all duration-[1200ms] delay-400 ${
-            loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
-          }`}
-        >
-          <div
-            style={{ fontSize: `${SUBTITLE_SIZE}px`, letterSpacing: "0.28em" }}
-            className="font-medium"
-          >
-            <div>{SUBTITLE_LINE_1}</div>
-            <div>{SUBTITLE_LINE_2}</div>
-          </div>
-        </div>
-
-        <img
-          src="/isotipo.png"
-          alt="Isotipo"
+          {hero.scrollIndicator.text}
+        </span>
+        <span
+          className="hero-scroll-line mt-3 block w-px"
           style={{
-            height: `${ISOTIPO_SIZE}px`,
-            transform: `translate(${ISO_X}px, ${ISO_Y}px)`,
+            height: hero.scrollIndicator.lineHeight,
+            backgroundColor: colors.white,
+            animationDuration: `${hero.scrollIndicator.speed}s`,
           }}
-          className={`absolute z-30 transition-all duration-[1300ms] delay-500 ${
-            loaded ? "opacity-100 scale-100" : "opacity-0 scale-75"
-          }`}
         />
-
-        <div
-          className={`z-30 flex gap-6 absolute transition-all duration-[1200ms] delay-500 ${
-            loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
-          }`}
-          style={{ transform: `translate(${BUTTONS_X}px, ${BUTTONS_Y}px)` }}
-        >
-          <button
-            onClick={() => scrollToSection("about")}
-            style={{
-              width: `${BUTTON_WIDTH}px`,
-              height: `${BUTTON_HEIGHT}px`,
-              borderRadius: "9999px",
-              backgroundColor: "#3578FF",
-            }}
-            className="font-bold text-sm transition hover:scale-105"
+        {hero.scrollIndicator.showArrow && (
+          <svg
+            width="10"
+            height="6"
+            viewBox="0 0 10 6"
+            fill="none"
+            className="mt-2"
+            aria-hidden="true"
           >
-            Conóceme
-          </button>
+            <path
+              d="M1 1l4 4 4-4"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
+      </a>
 
-          <button
-            onClick={() => scrollToSection("contact")}
-            style={{
-              width: `${BUTTON_WIDTH}px`,
-              height: `${BUTTON_HEIGHT}px`,
-              borderRadius: "9999px",
-              border: "2px solid white",
-            }}
-            className="font-bold text-sm transition hover:bg-white hover:text-black"
-          >
-            Trabajemos Juntos
-          </button>
-        </div>
-      </div>
+      <style>{`
+        @keyframes hero-scroll-line {
+          0% { transform: scaleY(0); transform-origin: top; }
+          45% { transform: scaleY(1); transform-origin: top; }
+          55% { transform: scaleY(1); transform-origin: bottom; }
+          100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+        .hero-scroll-line {
+          animation-name: hero-scroll-line;
+          animation-iteration-count: infinite;
+          animation-timing-function: ease-in-out;
+        }
+      `}</style>
     </section>
   );
 }

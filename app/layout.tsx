@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import { Viewport } from "next";
+import CustomCursor from "@/components/CustomCursor";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -45,6 +46,7 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${creato.className} ${lotus.variable} overflow-x-hidden`}>
         {children}
+        <CustomCursor />
       </body>
     </html>
   );

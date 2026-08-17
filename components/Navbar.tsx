@@ -1,95 +1,143 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { scrollToSection } from "@/utils/scrollToSection";
+import Link from "next/link";
+import { siteConfig } from "./site.config";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const { nav, colors } = siteConfig;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = open ? "hidden" : "";
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "";
     };
   }, [open]);
 
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
   return (
-    <nav className="absolute top-0 left-0 w-full z-[50] px-5 py-5 md:px-6 md:py-6 flex justify-between items-center">
-      
-      {/* LOGO */}
-<div className="flex items-center gap-2 md:gap-3 text-white font-bold">
-  <img
-    src="/iso.png"
-    alt="Isotipo"
-    className="h-6 w-auto md:h-8"
-  />
-  <span className="text-lg md:text-xl border-b-2 border-[#3578FF] md:border-b-0 pb-0.5 md:pb-0">
-    Vikings Estudio
-  </span>
-</div>
-
-      {/* DESKTOP MENU */}
-      <div className="hidden md:flex gap-8 text-white font-semibold">
-        <button onClick={() => scrollToSection("services")} className="hover:text-[#6B9CFF] transition">
-          Servicios
-        </button>
-        <button onClick={() => scrollToSection("portfolio")} className="hover:text-[#6B9CFF] transition">
-          Portafolio
-        </button>
-        <button onClick={() => scrollToSection("contact")} className="hover:text-[#6B9CFF] transition">
-          Contacto
-        </button>
-      </div>
-
-      {/* MOBILE BUTTON */}
-      <div className="md:hidden">
-        <button
-          onClick={() => setOpen(!open)}
-          className="text-white text-xl bg-white/10 backdrop-blur-md border border-white/20 rounded-lg w-11 h-11 flex items-center justify-center transition-transform duration-300 active:scale-95"
-          aria-label="Toggle menu"
-        >
-          {open ? "✕" : "☰"}
-        </button>
-      </div>
-
-      {/* MOBILE MENU */}
-      <div
-        className={`absolute top-full left-0 w-full bg-[#000000]/95 backdrop-blur-md flex flex-col items-center py-6 gap-6 md:hidden transition-all duration-300 ${
-          open ? "opacity-90 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
-        }`}
+    <header
+      className="fixed top-0 left-0 w-full z-50"
+      style={{
+        fontFamily: "var(--font-creato), sans-serif",
+        backgroundColor: colors.white,
+      }}
+    >
+      <nav
+        className="flex items-center justify-between"
+        style={{
+          height: nav.height,
+          paddingLeft: nav.paddingX,
+          paddingRight: nav.paddingX,
+        }}
       >
+        {/* IZQUIERDA: isotipo + marca */}
+        <Link href="/" className="flex items-center gap-3" aria-label={nav.brandText}>
+          {/* Isotipo teñido a #111316 mediante máscara CSS
+              (el archivo iso.png no se modifica) */}
+          <span
+            role="img"
+            aria-label={nav.logoAlt}
+            className="inline-block"
+            style={{
+              width: nav.logoHeight,
+              height: nav.logoHeight,
+              backgroundColor: colors.black,
+              WebkitMaskImage: `url(${nav.logoSrc})`,
+              maskImage: `url(${nav.logoSrc})`,
+              WebkitMaskSize: "contain",
+              maskSize: "contain",
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+              WebkitMaskPosition: "center",
+              maskPosition: "center",
+            }}
+          />
+          <span
+            className="whitespace-nowrap text-[11px] font-bold tracking-[0.3em] md:text-xs"
+            style={{ color: colors.black }}
+          >
+            {nav.brandText}
+          </span>
+        </Link>
+
+        {/* DERECHA: links desktop */}
+        <ul className="hidden items-center gap-10 md:flex">
+          {nav.links.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className="text-[11px] font-medium tracking-[0.35em] opacity-70 transition-opacity duration-300 hover:opacity-100"
+                style={{ color: colors.black }}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Hamburguesa mobile */}
         <button
-          onClick={() => { scrollToSection("services"); setOpen(false); }}
-          className="text-white font-semibold hover:text-[#6B9CFF] transition"
+          type="button"
+          onClick={() => setOpen(!open)}
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={open}
+          className="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-[6px] md:hidden"
         >
-          Servicios
+          <span
+            className={`block h-[1.5px] w-6 transition-all duration-300 ${
+              open ? "translate-y-[7.5px] rotate-45" : ""
+            }`}
+            style={{ backgroundColor: open ? colors.white : colors.black }}
+          />
+          <span
+            className={`block h-[1.5px] w-6 transition-opacity duration-300 ${
+              open ? "opacity-0" : "opacity-100"
+            }`}
+            style={{ backgroundColor: colors.black }}
+          />
+          <span
+            className={`block h-[1.5px] w-6 transition-all duration-300 ${
+              open ? "-translate-y-[7.5px] -rotate-45" : ""
+            }`}
+            style={{ backgroundColor: open ? colors.white : colors.black }}
+          />
         </button>
-        <button
-          onClick={() => { scrollToSection("portfolio"); setOpen(false); }}
-          className="text-white font-semibold hover:text-[#6B9CFF] transition"
-        >
-          Portafolio
-        </button>
-        <button
-          onClick={() => { scrollToSection("contact"); setOpen(false); }}
-          className="text-white font-semibold hover:text-[#6B9CFF] transition"
-        >
-          Contacto
-        </button>
+      </nav>
+
+      {/* Menú mobile: pantalla completa, entrada escalonada */}
+      <div
+        className={`fixed inset-0 z-40 flex flex-col items-center justify-center gap-9 transition-opacity duration-500 md:hidden ${
+          open ? "visible opacity-100" : "invisible opacity-0"
+        }`}
+        style={{ backgroundColor: colors.black }}
+        aria-hidden={!open}
+      >
+        {nav.links.map((link, i) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={() => setOpen(false)}
+            className={`text-xl font-bold tracking-[0.35em] transition-all duration-500 ${
+              open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            }`}
+            style={{
+              color: colors.white,
+              transitionDelay: open ? `${120 + i * 70}ms` : "0ms",
+            }}
+          >
+            {link.label}
+          </Link>
+        ))}
       </div>
-    </nav>
+    </header>
   );
 }

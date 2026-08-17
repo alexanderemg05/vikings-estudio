@@ -1,21 +1,17 @@
 @import "tailwindcss";
 
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #111316;
+  --foreground: #e8e3d5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   background: var(--background);
   color: var(--foreground);
 }
+
 
 .hero {
   position: relative;
@@ -24,6 +20,7 @@ body {
   color: white;
 }
 
+
 .hero-bg {
   width: 100%;
   height: 100%;
@@ -31,6 +28,7 @@ body {
   left: 0;
   transform: scale(1.1);
 }
+
 
 /* 👇 SOLO móvil */
 @media (max-width: 768px) {
@@ -41,6 +39,7 @@ body {
     left: 0;
   }
 }
+
 
 .hero-overlay {
   position: absolute;
@@ -55,6 +54,7 @@ body {
   z-index: 1;
 }
 
+
 .navbar {
   position: absolute;
   width: 100%;
@@ -64,11 +64,13 @@ body {
   z-index: 2;
 }
 
+
 @media (min-width: 768px) {
   .navbar {
     padding: 30px 120px; /* desktop intacto */
   }
 }
+
 
 .navbar a {
   margin-left: 16px;
@@ -76,11 +78,13 @@ body {
   color: white;
 }
 
+
 @media (min-width: 768px) {
   .navbar a {
     margin-left: 40px;
   }
 }
+
 
 .hero-content {
   position: relative;
@@ -94,11 +98,13 @@ body {
   text-align: center;
 }
 
+
 @media (min-width: 768px) {
   .hero-content {
     gap: 20px;
   }
 }
+
 
 .buttons {
   display: flex;
@@ -106,12 +112,14 @@ body {
   gap: 12px;
 }
 
+
 @media (min-width: 768px) {
   .buttons {
     flex-direction: row; /* desktop */
     gap: 20px;
   }
 }
+
 
 .btn {
   padding: 12px 22px;
@@ -122,6 +130,7 @@ body {
   font-size: 14px;
 }
 
+
 @media (min-width: 768px) {
   .btn {
     padding: 14px 30px;
@@ -129,15 +138,18 @@ body {
   }
 }
 
+
 .primary {
   background: white;
   color: black;
 }
 
+
 .outline {
   border: 1px solid white;
   color: white;
 }
+
 
 @keyframes fadeUp {
   from {
@@ -152,6 +164,7 @@ body {
   }
 }
 
+
 @keyframes revealLine {
   from {
     transform: scaleY(0);
@@ -163,18 +176,22 @@ body {
   }
 }
 
+
 .animate-line {
   transform-origin: top;
   animation: revealLine 1.2s cubic-bezier(.22,1,.36,1) forwards;
 }
 
+
 .font-lotus {
   font-family: var(--font-lotus);
 }
 
+
 /* ======================
    SERVICES ANIMATIONS
 ====================== */
+
 
 @keyframes fadeUpSoft {
   from {
@@ -189,6 +206,7 @@ body {
   }
 }
 
+
 @keyframes statueFloat {
   from {
     opacity: 0;
@@ -199,6 +217,7 @@ body {
     transform: translateY(0) scale(1);
   }
 }
+
 
 @keyframes lineReveal {
   from {
@@ -211,6 +230,7 @@ body {
   }
 }
 
+
 .animate-line-reveal {
   opacity: 0;
   transform: scaleX(0);
@@ -220,12 +240,14 @@ body {
   animation-delay: 0.5s;
 }
 
+
 .animate-statue {
   opacity: 0;
   transform: translateY(60px) scale(0.95);
 
   animation: statueFloat 1.6s cubic-bezier(.22,1,.36,1) forwards;
 }
+
 
 .animate-service {
   opacity: 0;
@@ -234,6 +256,7 @@ body {
 
   animation: fadeUpSoft 1s cubic-bezier(.22,1,.36,1) forwards;
 }
+
 
 @keyframes titleReveal {
   from {
@@ -246,6 +269,7 @@ body {
   }
 }
 
+
 .animate-title {
   opacity: 0;
   filter: blur(10px);
@@ -256,19 +280,11 @@ body {
 .delay-2 { animation-delay: 0.7s; }
 .delay-3 { animation-delay: 1s; }
 
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-/* 📱 Fondo mobile global */
-@media (max-width: 767px) {
-  body {
-    background: url('/fondo-mobile.png') no-repeat center top;
-    background-size: cover;
-    background-attachment: fixed;
-  }
 }
