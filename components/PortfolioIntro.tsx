@@ -13,7 +13,7 @@ const overlayOpacity = 0.6; // 0 = sin overlay · 1 = sólido
 
 // ✏️ CONTENIDO EDITABLE
 const content = {
-  eyebrow: "VIKINGS ESTUDIO",
+  eyebrow: "VIKINGS STUDIO",
   title: "SECCIÓN DE ", // crema/blanco
   titleAccent: "PROYECTOS", // azul de identidad #4B87FF
   tagline: "Una selección de proyectos de diseño, branding y Motion Graphics.",
