@@ -91,7 +91,7 @@ export default function StatementSection() {
                 className="block"
                 initial={{ opacity: 0, y: animation.distance }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
+                viewport={{ once: true, amount: 0.15 }}
                 transition={{
                   duration: animation.duration,
                   delay: 0.1 + i * animation.stagger,
@@ -108,7 +108,7 @@ export default function StatementSection() {
         <motion.p
           initial={{ opacity: 0, y: animation.distance }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{
             duration: animation.duration,
             delay: 0.1 + content.titleLines.length * animation.stagger,
