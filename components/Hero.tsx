@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "./Navbar";
 import { siteConfig } from "./site.config";
 
@@ -16,6 +16,7 @@ export default function Hero() {
   const { hero, colors } = siteConfig;
   const [loaded, setLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -30,27 +31,81 @@ export default function Hero() {
       ? hero.background.mobileVideo
       : hero.background.desktopVideo;
 
+  // ✅ Autoplay robusto para Safari iOS + Chrome móvil.
+  // Si el source cambia tras el montaje: load() + play() seguro.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    // Atributos obligatorios para autoplay en iOS
+    v.muted = true;
+    v.defaultMuted = true;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "");
+
+    try {
+      v.load();
+    } catch (e) {
+      /* noop */
+    }
+
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && typeof p.then === "function") {
+        p.catch(() => {
+          // Autoplay bloqueado: reintenta en la primera interacción del usuario
+          const resume = () => {
+            v.play().catch(() => {});
+            cleanup();
+          };
+          const cleanup = () => {
+            document.removeEventListener("touchstart", resume);
+            document.removeEventListener("click", resume);
+          };
+          document.addEventListener("touchstart", resume, { once: true });
+          document.addEventListener("click", resume, { once: true });
+        });
+      }
+    };
+
+    if (v.readyState >= 2) {
+      tryPlay();
+    } else {
+      v.addEventListener("loadeddata", tryPlay, { once: true });
+    }
+
+    return () => {
+      v.removeEventListener("loadeddata", tryPlay);
+    };
+  }, [videoSrc]);
+
   return (
     <section
-      className="relative w-full overflow-hidden"
+      className="hero-section relative w-full overflow-hidden"
       style={{
+        // DESKTOP: se mantiene EXACTAMENTE igual
         height: "100svh",
         minHeight: "100vh",
         backgroundColor: colors.black,
         fontFamily: "var(--font-creato), sans-serif",
       }}
     >
-      {/* ===== 1. BACKGROUND (imagen ahora · vídeo en el futuro) ===== */}
+      {/* ===== 1. BACKGROUND ===== */}
       <div
         className="absolute inset-0 z-0 transition-transform duration-[2400ms] ease-out"
         style={{ transform: loaded ? "scale(1)" : "scale(1.07)" }}
       >
         {hero.background.type === "video" ? (
           <video
+            ref={videoRef}
             autoPlay
             muted
             loop
             playsInline
+            preload="auto"
+            // @ts-ignore — atributo específico de iOS
+            webkit-playsinline="true"
             className="h-full w-full object-cover"
             style={{ objectPosition: hero.background.position }}
           >
@@ -66,14 +121,13 @@ export default function Hero() {
         )}
       </div>
 
-      {/* ===== 2. OVERLAY (color + opacidad configurables) ===== */}
+      {/* ===== 2. OVERLAY ===== */}
       <div
         className="absolute inset-0 z-[1]"
         style={{
           backgroundColor: hexToRgba(colors.overlayColor, colors.overlayOpacity),
         }}
       />
-      {/* Viñeta cinematográfica suave */}
       <div
         className="absolute inset-0 z-[1]"
         style={{
@@ -92,12 +146,10 @@ export default function Hero() {
 
       {/* ===== 4. HERO CONTENT ===== */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-        {/* Isotipo — firma de marca sobre el título
-            (teñido a #E8E3D5 con máscara CSS, iso.png no se modifica) */}
         <span
           role="img"
           aria-label="Isotipo Vikings Studio"
-          className={`block transition-all duration-[1200ms] ease-out ${
+          className={`hero-iso block transition-all duration-[1200ms] ease-out ${
             loaded ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
           style={{
@@ -118,7 +170,7 @@ export default function Hero() {
         />
 
         <h1
-          className={`uppercase transition-all duration-[1200ms] ease-out ${
+          className={`hero-title uppercase transition-all duration-[1200ms] ease-out ${
             loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
           style={{
@@ -138,7 +190,7 @@ export default function Hero() {
         </h1>
 
         <p
-          className={`uppercase transition-all duration-[1200ms] ease-out ${
+          className={`hero-subtitle uppercase transition-all duration-[1200ms] ease-out ${
             loaded ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
           style={{
@@ -154,7 +206,7 @@ export default function Hero() {
         </p>
 
         <p
-          className={`uppercase transition-all duration-[1200ms] ease-out ${
+          className={`hero-tagline uppercase transition-all duration-[1200ms] ease-out ${
             loaded ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
           }`}
           style={{
@@ -232,6 +284,37 @@ export default function Hero() {
           animation-name: hero-scroll-line;
           animation-iteration-count: infinite;
           animation-timing-function: ease-in-out;
+        }
+
+        /* ============================================================
+           📱 SOLO MOBILE (< 768px) — DESKTOP NO SE TOCA
+           - Altura estable con svh (evita el conflicto 100svh vs 100vh
+             de Safari iOS y el scroll vertical innecesario).
+           - Isotipo y "ALEX MORENO" proporcionalmente más grandes.
+           - Subtítulos reescalados manteniendo la jerarquía.
+           ============================================================ */
+        @media (max-width: 767px) {
+          .hero-section {
+            height: 100svh !important;
+            min-height: 100svh !important;
+          }
+          .hero-iso {
+            width: 2.75rem !important;
+            height: 2.75rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+          .hero-title {
+            font-size: clamp(3rem, 13vw, 4rem) !important;
+            line-height: 0.95 !important;
+          }
+          .hero-subtitle {
+            font-size: 0.85rem !important;
+            letter-spacing: 0.4em !important;
+          }
+          .hero-tagline {
+            font-size: 0.72rem !important;
+            letter-spacing: 0.28em !important;
+          }
         }
       `}</style>
     </section>

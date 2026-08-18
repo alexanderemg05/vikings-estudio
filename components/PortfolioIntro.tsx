@@ -3,24 +3,19 @@
 import { motion } from "framer-motion";
 import { siteConfig } from "./site.config";
 
-// ============================================================
-// 🖼 IMAGEN DE FONDO — TEMPORAL (reutiliza tu fondo del Hero).
-// ============================================================
 const portfolioIntroImage = "/fondo-2.png";
-const overlayOpacity = 0.6; // 0 = sin overlay · 1 = sólido
+const overlayOpacity = 0.6;
 
-// ✏️ CONTENIDO EDITABLE
 const content = {
   eyebrow: "VIKINGS ESTUDIO",
-  title: "SECCIÓN DE ", // crema/blanco
-  titleAccent: "PROYECTOS", // azul de identidad #4B87FF
+  title: "SECCIÓN DE ",
+  titleAccent: "PROYECTOS",
   tagline: "Una selección de proyectos de diseño, branding y Motion Graphics.",
 };
 
-// ◈ ISO sobre el eyebrow (firma de marca)
 const iso = {
   src: "/iso.png",
-  size: "clamp(1.75rem, 3vw, 2.5rem)", // 28px móvil · 40px desktop
+  size: "clamp(1.75rem, 3vw, 2.5rem)",
   marginBottom: "1.25rem",
 };
 
@@ -46,21 +41,17 @@ export default function PortfolioIntro() {
         fontFamily: "var(--font-inter), sans-serif",
       }}
     >
-      {/* BACKGROUND */}
       <img
         src={portfolioIntroImage}
         alt=""
         className="absolute inset-0 h-full w-full object-cover"
       />
-      {/* OVERLAY */}
       <div
         className="absolute inset-0"
         style={{ backgroundColor: hexToRgba(colors.black, overlayOpacity) }}
       />
 
-      {/* CONTENIDO */}
       <div className="portfolio-intro-content relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-        {/* ISO — teñido a #E8E3D5 con máscara CSS */}
         <motion.span
           role="img"
           aria-label="Isotipo Vikings Studio"
@@ -138,7 +129,6 @@ export default function PortfolioIntro() {
         </motion.p>
       </div>
 
-      {/* SCROLL CUE */}
       <motion.div
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
         initial={{ opacity: 0 }}
