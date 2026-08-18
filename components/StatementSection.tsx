@@ -64,6 +64,7 @@ export default function StatementSection() {
       >
         {/* TÍTULO — Creato Display, saltos de línea intencionales */}
         <h2
+          className="statement-title"
           style={{
             fontSize: "var(--statement-title-size)",
             fontWeight: 800,
@@ -141,6 +142,15 @@ export default function StatementSection() {
           .statement-section {
             --statement-padding-y: clamp(3.25rem, 8vh, 4.5rem) !important;
             --statement-gap: clamp(1.5rem, 4vh, 2.25rem) !important;
+          }
+          /* 🔒 Garantía de visibilidad en iPhone físico:
+             si whileInView no dispara en Safari iOS, forzamos el
+             estado final visible. Solo mobile → desktop conserva su animación. */
+          .statement-title,
+          .statement-title span {
+            opacity: 1 !important;
+            transform: none !important;
+            overflow: visible !important;
           }
         }
       `}</style>
