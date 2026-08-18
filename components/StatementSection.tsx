@@ -35,6 +35,7 @@ export default function StatementSection() {
 
   // ============================================================
   // 🎛️ VARIABLES DE DISEÑO — edita aquí tamaños, anchuras y espaciado
+  // (Estos valores son los de DESKTOP y NO se tocan)
   // ============================================================
   const vars = {
     "--statement-title-size": "clamp(2.25rem, 6vw, 5.5rem)",
@@ -50,7 +51,7 @@ export default function StatementSection() {
   return (
     <section
       id="about"
-      className="relative z-30 w-full overflow-hidden"
+      className="statement-section relative z-30 w-full overflow-hidden"
       style={vars}
     >
       <div
@@ -125,6 +126,24 @@ export default function StatementSection() {
           {content.description}
         </motion.p>
       </div>
+
+      <style>{`
+        /* ============================================================
+           📱 SOLO MOBILE (< 768px) — no afecta a DESKTOP en absoluto.
+           Reduce el enorme espacio vertical entre el Hero y el claim.
+           Sobreescribimos SOLO las variables de espaciado con !important
+           (una regla !important de hoja de estilos gana a la variable
+           inline), así el título y el texto suben cerca de la parte
+           superior manteniendo un margen elegante.
+           No se tocan tipografías, colores, tamaños ni animaciones.
+           ============================================================ */
+        @media (max-width: 767px) {
+          .statement-section {
+            --statement-padding-y: clamp(3.25rem, 8vh, 4.5rem) !important;
+            --statement-gap: clamp(1.5rem, 4vh, 2.25rem) !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

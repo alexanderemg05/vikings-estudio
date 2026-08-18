@@ -5,15 +5,13 @@ import { siteConfig } from "./site.config";
 
 // ============================================================
 // 🖼 IMAGEN DE FONDO — TEMPORAL (reutiliza tu fondo del Hero).
-// Sustitúyela por tu imagen cinematográfica, por ejemplo:
-// const portfolioIntroImage = "/portfolio-intro.jpg";
 // ============================================================
 const portfolioIntroImage = "/fondo-2.png";
 const overlayOpacity = 0.6; // 0 = sin overlay · 1 = sólido
 
 // ✏️ CONTENIDO EDITABLE
 const content = {
-  eyebrow: "VIKINGS STUDIO",
+  eyebrow: "VIKINGS ESTUDIO",
   title: "SECCIÓN DE ", // crema/blanco
   titleAccent: "PROYECTOS", // azul de identidad #4B87FF
   tagline: "Una selección de proyectos de diseño, branding y Motion Graphics.",
@@ -41,7 +39,7 @@ export default function PortfolioIntro() {
 
   return (
     <section
-      className="relative w-full overflow-hidden"
+      className="portfolio-intro relative w-full overflow-hidden"
       style={{
         height: "80vh",
         minHeight: "520px",
@@ -61,8 +59,8 @@ export default function PortfolioIntro() {
       />
 
       {/* CONTENIDO */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-        {/* ISO — teñido a #E8E3D5 con máscara CSS, iso.png no se modifica */}
+      <div className="portfolio-intro-content relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+        {/* ISO — teñido a #E8E3D5 con máscara CSS */}
         <motion.span
           role="img"
           aria-label="Isotipo Vikings Studio"
@@ -164,6 +162,23 @@ export default function PortfolioIntro() {
         }
         .intro-scroll-line {
           animation: intro-scroll-line 2.2s ease-in-out infinite;
+        }
+
+        /* 📱 SOLO MOBILE (< 768px) — DESKTOP NO SE TOCA */
+        @media (max-width: 767px) {
+          .portfolio-intro {
+            height: auto !important;
+            min-height: auto !important;
+          }
+          .portfolio-intro-content {
+            height: auto !important;
+            justify-content: flex-start !important;
+            padding-top: 4.5rem !important;
+            padding-bottom: 5rem !important;
+          }
+          .portfolio-intro .intro-scroll-line {
+            display: none;
+          }
         }
       `}</style>
     </section>
