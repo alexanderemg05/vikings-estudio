@@ -172,7 +172,7 @@ const motionProjectsData: ProjectDetail[] = [
     title: "Golf",
     category: "Motion Graphics",
     type: "video",
-    video: "/videos/golf.mp4",
+    video: "/videos/golf-video.mp4",
     thumbnail: "",
     subtitle: "Motion graphics para una pieza promocional de ropa deportiva.",
     genre: "Motion Graphics",
