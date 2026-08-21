@@ -39,7 +39,9 @@ const lotus = localFont({
 export const metadata: Metadata = {
   title: "Vikings Studio",
   description: "Identidad. Estrategia. Impacto.",
-  // ❌ eliminado "viewport" de aquí (deprecado y en conflicto con el export)
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
